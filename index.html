@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌌 FrostByte - Écosystème d'Exploration Spatiale</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 50%, #16213e 100%);
+            min-height: 100vh;
+            color: white;
+            overflow-x: hidden;
+        }
+        
+        .starfield {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 2s infinite alternate;
+        }
+        
+        @keyframes twinkle {
+            0% { opacity: 0.3; }
+            100% { opacity: 1; }
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .header h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #00d4ff, #ff6b6b, #4ecdc4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes glow {
+            from { filter: drop-shadow(0 0 20px rgba(0, 212, 255, 0.5)); }
+            to { filter: drop-shadow(0 0 30px rgba(255, 107, 107, 0.5)); }
+        }
+        
+        .header p {
+            font-size: 1.3rem;
+            color: #a0a0a0;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 1rem;
+            color: #666;
+        }
+        
+        .components-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            width: 100%;
+            max-width: 1000px;
+        }
+        
+        .component-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .component-card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.5s;
+        }
+        
+        .component-card:hover:before {
+            left: 100%;
+        }
+        
+        .component-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 212, 255, 0.3);
+        }
+        
+        .component-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+        
+        .component-title {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: #00d4ff;
+        }
+        
+        .component-description {
+            color: #ccc;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        .component-status {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .status-live {
+            background: rgba(76, 175, 80, 0.3);
+            color: #4caf50;
+        }
+        
+        .status-demo {
+            background: rgba(255, 193, 7, 0.3);
+            color: #ffc107;
+        }
+        
+        .footer {
+            margin-top: 50px;
+            text-align: center;
+            color: #666;
+        }
+        
+        .tech-stack {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        
+        .tech-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .components-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="starfield" id="starfield"></div>
+    
+    <div class="container">
+        <div class="header">
+            <h1>🌌 FrostByte</h1>
+            <p>Écosystème d'Exploration Spatiale Interactif</p>
+            <p class="subtitle">Intelligence Artificielle • Machine Learning • Gaming Éducatif</p>
+            
+            <div class="tech-stack">
+                <span class="tech-item">🎮 HTML5 Games</span>
+                <span class="tech-item">🤖 AI Chatbot</span>
+                <span class="tech-item">📊 ML Dashboard</span>
+                <span class="tech-item">🚀 Node.js</span>
+                <span class="tech-item">🐍 Python</span>
+            </div>
+        </div>
+        
+        <div class="components-grid">
+            <div class="component-card" onclick="window.open('/game/', '_blank')">
+                <span class="component-icon">🎮</span>
+                <h3 class="component-title">Jeu Cosmo</h3>
+                <div class="component-status status-live">🟢 LIVE</div>
+                <p class="component-description">
+                    Explorez l'univers avec Cosmo ! Découvrez les exoplanètes, répondez aux quiz d'astronomie et progressez à travers 10 niveaux galactiques.
+                </p>
+            </div>
+            
+            <div class="component-card" onclick="window.open('/chatbot', '_blank')">
+                <span class="component-icon">🤖</span>
+                <h3 class="component-title">Chatbot IA</h3>
+                <div class="component-status status-live">🟢 LIVE</div>
+                <p class="component-description">
+                    Assistant intelligent multilingue spécialisé en exoplanètes. Posez vos questions sur l'astronomie et l'exploration spatiale !
+                </p>
+            </div>
+            
+            <div class="component-card" onclick="alert('Dashboard Streamlit disponible en local uniquement. Démarrez avec ./start_frostbyte.sh')">
+                <span class="component-icon">📊</span>
+                <h3 class="component-title">Dashboard ML</h3>
+                <div class="component-status status-demo">🟡 LOCAL</div>
+                <p class="component-description">
+                    Interface de prédiction d'exoplanètes avec modèles Machine Learning. Analysez les données NASA en temps réel.
+                </p>
+            </div>
+            
+            <div class="component-card" onclick="window.open('https://github.com/Promis229/FrostByte', '_blank')">
+                <span class="component-icon">💻</span>
+                <h3 class="component-title">Code Source</h3>
+                <div class="component-status status-live">🟢 GITHUB</div>
+                <p class="component-description">
+                    Accédez au code source complet, à la documentation et aux guides de déploiement sur GitHub.
+                </p>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>🌟 Développé avec passion pour l'exploration spatiale</p>
+            <p>📡 Technologies: React, Node.js, Python, scikit-learn, Streamlit</p>
+            <p>🚀 © 2025 FrostByte - Explorez l'univers avec l'IA</p>
+        </div>
+    </div>
+    
+    <script>
+        // Créer le champ d'étoiles
+        function createStarfield() {
+            const starfield = document.getElementById('starfield');
+            const numStars = 200;
+            
+            for (let i = 0; i < numStars; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.width = Math.random() * 3 + 1 + 'px';
+                star.style.height = star.style.width;
+                star.style.animationDelay = Math.random() * 2 + 's';
+                starfield.appendChild(star);
+            }
+        }
+        
+        createStarfield();
+        
+        // Effet de parallaxe sur les étoiles
+        document.addEventListener('mousemove', (e) => {
+            const stars = document.querySelectorAll('.star');
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+            
+            stars.forEach((star, index) => {
+                const speed = (index % 5 + 1) * 0.5;
+                star.style.transform = `translate(${x * speed}px, ${y * speed}px)`;
+            });
+        });
+    </script>
+</body>
+</html>

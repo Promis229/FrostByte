@@ -1,24 +1,27 @@
 {
-  "name": "chatbot_ollama",
+  "name": "frostbyte-ecosystem",
   "version": "1.0.0",
-  "description": "Le Chatbot avec Ollama est une mini-API qui & été réalisé avec un modèle pré-entraîné appelé \"Promis\", une version revue de \"Mistral\", celui-ci proposant des services plus aigus et adaptés au cadre informatique. Ce projet est structuré en trois parties essentielles à savoir:     |-- Script python pour installer les dépendances(En l'occurence, installer d'abord le modèle Mistral de Ollama)     |-- .venv (Environnement virtuel utilisé pour assurer que les données soient protégées et plus failes à exporter)     |    |--bin     |    |--etc     |    |--lib     |- Chat minimal créé     |",
+  "description": "🌌 FrostByte - Écosystème d'exploration spatiale interactif avec IA, jeux éducatifs et Machine Learning pour la découverte d'exoplanètes",
   "main": "server.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node server.js",
+    "test": "node server_test.js",
+    "build": "echo 'Build successful - Static site ready'",
+    "deploy": "./deploy.sh",
+    "vercel-build": "echo 'Vercel build complete'"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Promis229/Chatbot_ollama.git"
+    "url": "git+https://github.com/Promis229/FrostByte.git"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": ["space", "ai", "exoplanets", "machine-learning", "chatbot", "education", "astronomy", "gaming"],
+  "author": "FrostByte Team",
+  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Promis229/Chatbot_ollama/issues"
+    "url": "https://github.com/Promis229/FrostByte/issues"
   },
-  "homepage": "https://github.com/Promis229/Chatbot_ollama#readme",
+  "homepage": "https://github.com/Promis229/FrostByte#readme",
   "dependencies": {
     "axios": "^1.12.2",
     "body-parser": "^2.2.0",
@@ -29,5 +32,8 @@
     "node-fetch": "^3.3.2",
     "ollama": "^0.6.0",
     "openai": "^6.1.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   }
 }

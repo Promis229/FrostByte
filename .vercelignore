@@ -1,0 +1,39 @@
+# Python virtual environment
+chatbot_env/
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+
+# ML Models (too large for Vercel)
+*.pkl
+*.joblib
+
+# Data files
+datas.csv
+datas_cleaned.csv
+
+# Logs
+*.log
+logs/
+
+# Development files
+.pytest_cache/
+.coverage
+.env.local
+
+# Docker files
+Dockerfile
+docker-compose.yml
+docker-entrypoint.sh
+
+# Large dependencies
+node_modules/
+
+# Build files
+dist/
+build/
+
+# OS files
+.DS_Store
+Thumbs.db

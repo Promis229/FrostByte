@@ -1,0 +1,35 @@
+{
+  "builds": [
+    {
+      "src": "server_test.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/chat",
+      "dest": "/server_test.js"
+    },
+    {
+      "src": "/api/test",
+      "dest": "/server_test.js"
+    },
+    {
+      "src": "/game/(.*)",
+      "dest": "/game/$1"
+    },
+    {
+      "src": "/chatbot",
+      "dest": "/chatbot_test.html"
+    },
+    {
+      "src": "/",
+      "dest": "/game/index.html"
+    }
+  ],
+  "functions": {
+    "server_test.js": {
+      "maxDuration": 30
+    }
+  }
+}
