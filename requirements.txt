@@ -1,0 +1,22 @@
+# FrostByte - Dépendances Python
+# Installation: pip install -r requirements.txt
+
+# Backend ML et API
+flask==3.1.0
+numpy==2.3.3
+scikit-learn==1.6.0
+joblib==1.4.2
+
+# Chatbot et traduction
+requests==2.32.5
+deep-translator==1.11.4
+langdetect==1.0.9
+
+# Dashboard et visualisation
+streamlit==1.50.0
+plotly==6.3.1
+pandas==2.3.3
+
+# Utilitaires
+python-dateutil==2.9.0
+pytz==2025.2

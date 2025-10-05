@@ -69,7 +69,7 @@ const quizQuestions = [
     },
     {
         question: "What is an exoplanet?",
-        answers: ["Une planète éteinte", "Une planète en dehors de notre système solaire", "Une planète géante", "Une planète artificielle"],
+        answers: ["An extinct planet", "A planet outside our solar system", "A giant planet", "An artificial planet"],
         correct: 1,
         explanation: "An exoplanet is a planet that orbits a star other than the Sun."
     },
@@ -77,17 +77,17 @@ const quizQuestions = [
         question: "Which method is most used to detect exoplanets?",
         answers: ["Observation directe", "Transit photométrique", "Imagerie radio", "Spectroscopie"],
         correct: 1,
-        explanation: "The photometric transit method detects the decrease in brightness quand une planète passe devant son étoile."
+        explanation: "The photometric transit method detects the decrease in brightness when a planet passes in front of its star."
     },
     {
         question: "What is the habitable zone of a star?",
-        answers: ["La zone la plus chaude", "La zone où l'eau peut être liquide", "La zone la plus froide", "La zone sans atmosphère"],
+        answers: ["The hottest zone", "The zone where water can be liquid", "The coldest zone", "The zone without atmosphere"],
         correct: 1,
-        explanation: "The habitable zone is the region around a star where temperatures allow à l'eau d'être liquide."
+        explanation: "The habitable zone is the region around a star where temperatures allow water to be liquid."
     },
     {
         question: "How many exoplanets have been discovered to date?",
-        answers: ["Moins de 100", "Entre 100 et 1000", "Plus de 5000", "Exactement 2000"],
+        answers: ["Less than 100", "Between 100 and 1000", "More than 5000", "Exactly 2000"],
         correct: 2,
         explanation: "More than 5000 exoplanets have been confirmed, avec des milliers d'autres candidates en attente de confirmation."
     },
@@ -99,7 +99,7 @@ const quizQuestions = [
     },
     {
         question: "What is a hot Jupiter?",
-        answers: ["Jupiter en été", "Une planète géante très proche de son étoile", "Jupiter avec des volcans", "Une étoile ratée"],
+        answers: ["Jupiter in summer", "A giant planet very close to its star", "Jupiter with volcanoes", "A failed star"],
         correct: 1,
         explanation: "A hot Jupiter is a gas giant planet that orbits very close to its star, créant des températures extrêmes."
     },
@@ -107,46 +107,46 @@ const quizQuestions = [
         question: "Which space telescope has discovered the most exoplanets?",
         answers: ["Hubble", "Kepler", "Spitzer", "Chandra"],
         correct: 1,
-        explanation: "Le télescope spatial Kepler a découvert plus de 2600 exoplanètes confirmées grâce à sa méthode de transit."
+        explanation: "The Kepler space telescope has discovered more than 2,600 confirmed exoplanets using its transit method."
     },
     {
         question: "What is radial velocity?",
-        answers: ["La vitesse de rotation d'une planète", "L'oscillation d'une étoile causée par une planète", "La vitesse d'éloignement d'une galaxie", "La vitesse de la lumière"],
+        answers: ["The rotation speed of a planet", "The wobble of a star caused by a planet", "The speed of a galaxy moving away", "The speed of light"],
         correct: 1,
-        explanation: "La vitesse radiale mesure l'oscillation d'une étoile causée par l'attraction gravitationnelle d'une planète en orbite."
+        explanation: "Radial velocity measures the wobble of a star caused by the gravitational pull of an orbiting planet."
     },
     {
         question: "Which planet in our solar system is most similar to Earth?",
         answers: ["Mars", "Venus", "Neptune", "Titan"],
         correct: 0,
-        explanation: "Mars est la planète la plus similaire à la Terre en termes de taille, composition rocheuse et durée du jour."
+        explanation: "Mars is the planet most similar to Earth in terms of size, rocky composition, and day length."
     }
 ];
 
 const knowledgeEntries = [
     {
-        title: "Les Exoplanètes",
-        content: "Les exoplanètes sont des planètes qui tournent autour d'étoiles autres que notre Soleil. Plus de 5000 ont été découvertes !",
+        title: "Exoplanets",
+        content: "Exoplanets are planets that orbit stars other than our Sun. More than 5,000 have been discovered!",
         type: "discovery"
     },
     {
         title: "Zone Habitable",
-        content: "The habitable zone is the region around a star where temperatures allow à l'eau liquide d'exister.",
+        content: "The habitable zone is the region around a star where temperatures allow liquid water to exist.",
         type: "science"
     },
     {
-        title: "Méthode du Transit",
-        content: "Cette méthode détecte les exoplanètes en observant la baisse de luminosité quand elles passent devant leur étoile.",
+        title: "Transit Method",
+        content: "This method detects exoplanets by observing the decrease in brightness when they pass in front of their star.",
         type: "method"
     },
     {
-        title: "Super-Terres",
-        content: "Les super-Terres sont des planètes rocheuses plus grandes que la Terre mais plus petites que Neptune.",
+        title: "Super-Earths",
+        content: "Super-Earths are rocky planets larger than Earth but smaller than Neptune.",
         type: "classification"
     },
     {
-        title: "Atmosphères Exoplanétaires",
-        content: "L'étude des atmosphères d'exoplanètes peut révéler la présence d'eau, d'oxygène ou même de signes de vie.",
+        title: "Exoplanetary Atmospheres",
+        content: "Studying the atmospheres of exoplanets can reveal the presence of water, oxygen, or even signs of life.",
         type: "biosignatures"
     }
 ];
@@ -267,11 +267,11 @@ function startLoadingSequence() {
 
         let currentProgress = 0;
         const stages = [
-            "Calibrage des senseurs...",
-            "Connexion au réseau galactique...", 
-            "Chargement des données stellaires...",
-            "Initialisation du scanner...",
-            "Prêt pour l'exploration !"
+            "Calibrating sensors...",
+            "Connecting to the Galactic Network...",
+            "Loading stellar data...",
+            "Initializing scanner...",
+            "Ready for exploration!"
         ];
         
         const loadingInterval = setInterval(() => {
@@ -341,12 +341,12 @@ function hideTutorial() {
 
 function showLeaderboard() {
     
-    alert('Fonctionnalité à venir : Classement des meilleurs chasseurs !');
+    alert('Upcoming Feature: Top Hunters Ranking!');
 }
 
 function showSettings() {
     
-    alert('Fonctionnalité à venir : Paramètres du jeu !');
+    alert('Upcoming Feature: Game Settings!');
 }
 
 function initializeGameScreen() {
@@ -413,7 +413,7 @@ function generateStellarSystem() {
 }
 
 function createPlanet(index, orbitRadius) {
-    
+    FROSTBYTE
     const orbit = document.createElement('div');
     orbit.className = 'planet-orbit';
     orbit.style.width = orbitRadius * 2 + 'px';
@@ -759,69 +759,69 @@ function generatePlanetData(isHabitable) {
     const planetTypes = isHabitable ? 
         [
             {
-                name: 'Terre-like',
+                name: 'Earth-like',
                 image: 'earth-like.svg',
-                description: 'Une planète remarquablement similaire à la Terre, avec des océans liquides, des continents et une atmosphère respirable.',
-                characteristics: ['Océans liquides', 'Atmosphère dense', 'Activité tectonique', 'Champ magnétique'],
-                rarity: 'Très rare'
+                description: 'A planet remarkably similar to Earth, with liquid oceans, continents and a breathable atmosphere.',
+                characteristics: ['Liquid oceans', 'Dense atmosphere', 'Tectonic activity', 'Magnetic field'],
+                rarity: 'Very rare'
             },
             {
-                name: 'Super-Terre',
+                name: 'Super-Earth',
                 image: 'super-earth.svg', 
-                description: 'Une planète rocheuse plus massive que la Terre, avec une gravité intense mais potentiellement habitable.',
-                characteristics: ['Gravité élevée', 'Atmosphère épaisse', 'Saisons longues', 'Montagnes géantes'],
+                description: 'A rocky planet more massive than Earth, with intense gravity but potentially habitable.',
+                characteristics: ['High gravity', 'Thick atmosphere', 'Long seasons', 'Giant mountains'],
                 rarity: 'Rare'
             },
             {
-                name: 'Planète Océan',
+                name: 'Ocean Planet',
                 image: 'ocean-planet.svg',
-                description: 'Un monde entièrement recouvert d\'océans profonds, abritant potentiellement une vie aquatique complexe.',
-                characteristics: ['Océans globaux', 'Pas de continents', 'Courants puissants', 'Vie marine possible'],
+                description: 'A world entirely covered by deep oceans, potentially harboring complex aquatic life.',
+                characteristics: ['Global oceans', 'No continents', 'Powerful currents', 'Possible marine life'],
                 rarity: 'Rare'
             }
         ] :
         [
             {
-                name: 'Jupiter Chaud',
+                name: 'Hot Jupiter',
                 image: 'hot-jupiter.svg',
-                description: 'Une géante gazeuse brûlante orbitant très près de son étoile, avec des vents supersonniques et des températures infernales.',
-                characteristics: ['Température extrême', 'Vents à 2000 km/h', 'Nuages métalliques', 'Orbite rapide'],
-                rarity: 'Commun'
+                description: 'A burning gas giant orbiting very close to its star, with supersonic winds and hellish temperatures.',
+                characteristics: ['Extreme temperature', '2000 km/h winds', 'Metallic clouds', 'Fast orbit'],
+                rarity: 'Common'
             },
             {
-                name: 'Géante Gazeuse',
+                name: 'Gas Giant',
                 image: 'gas-giant.svg',
-                description: 'Une massive planète composée principalement d\'hydrogène et d\'hélium, ornée d\'anneaux spectaculaires.',
-                characteristics: ['Système d\'anneaux', 'Nombreuses lunes', 'Tempêtes géantes', 'Champ magnétique intense'],
-                rarity: 'Commun'
+                description: 'A massive planet composed mainly of hydrogen and helium, adorned with spectacular rings.',
+                characteristics: ['Ring system', 'Many moons', 'Giant storms', 'Intense magnetic field'],
+                rarity: 'Common'
             },
             {
-                name: 'Planète Rocheuse',
+                name: 'Rocky Planet',
                 image: 'rocky-planet.svg',
-                description: 'Un monde aride et désolé, criblé de cratères et balayé par des tempêtes de poussière.',
-                characteristics: ['Surface cratérisée', 'Atmosphère fine', 'Tempêtes de poussière', 'Activité volcanique'],
-                rarity: 'Très commun'
+                description: 'An arid and desolate world, riddled with craters and swept by dust storms.',
+                characteristics: ['Cratered surface', 'Thin atmosphere', 'Dust storms', 'Volcanic activity'],
+                rarity: 'Very common'
             },
             {
                 name: 'Mars',
                 image: 'mars.svg',
-                description: 'La planète rouge de notre système solaire, avec ses calottes polaires glacées et ses canyons gigantesques.',
-                characteristics: ['Calottes polaires', 'Valles Marineris', 'Olympus Mons', 'Tempêtes de poussière'],
-                rarity: 'Légendaire'
+                description: 'The red planet of our solar system, with its icy polar caps and gigantic canyons.',
+                characteristics: ['Polar ice caps', 'Valles Marineris', 'Olympus Mons', 'Dust storms'],
+                rarity: 'Legendary'
             },
             {
-                name: 'Vénus',
+                name: 'Venus',
                 image: 'venus.svg',
-                description: 'L\'étoile du matin, un monde infernal avec une atmosphère d\'acide sulfurique et un effet de serre extrême.',
-                characteristics: ['Atmosphère toxique', 'Effet de serre', 'Nuages d\'acide', 'Rotation rétrograde'],
-                rarity: 'Légendaire'
+                description: 'The morning star, a hellish world with a sulfuric acid atmosphere and extreme greenhouse effect.',
+                characteristics: ['Toxic atmosphere', 'Greenhouse effect', 'Acid clouds', 'Retrograde rotation'],
+                rarity: 'Legendary'
             },
             {
-                name: 'Saturne',
+                name: 'Saturn',
                 image: 'saturn.svg',
-                description: 'Le joyau du système solaire, une géante gazeuse ornée de magnifiques anneaux et de dizaines de lunes.',
-                characteristics: ['Anneaux spectaculaires', '82 lunes connues', 'Densité faible', 'Hexagone polaire'],
-                rarity: 'Légendaire'
+                description: 'The jewel of the solar system, a gas giant adorned with magnificent rings and dozens of moons.',
+                characteristics: ['Spectacular rings', '82 known moons', 'Low density', 'Polar hexagon'],
+                rarity: 'Legendary'
             }
         ];
     
@@ -848,84 +848,84 @@ function generatePlanetData(isHabitable) {
         description: selectedType.description,
         characteristics: selectedType.characteristics,
         rarity: selectedType.rarity,
-        size: size + ' × Terre',
-        mass: mass + ' × Terre',
+        size: size + ' × Earth',
+        mass: mass + ' × Earth',
         temperature: temperature + 'K',
         temperatureCelsius: (temperature - 273).toFixed(0) + '°C',
-        distance: distance + ' années-lumière',
-        orbitalPeriod: orbitalPeriod + ' jours',
+        distance: distance + ' light-years',
+        orbitalPeriod: orbitalPeriod + ' days',
         habitable: isHabitable,
         discovered: false,
         facts: facts,
-        discoveryDate: new Date().toLocaleDateString('fr-FR')
+        discoveryDate: new Date().toLocaleDateString('en-US')
     };
 }
 
 function generatePlanetFacts(planetType, isHabitable) {
     const factDatabase = {
-        'Terre-like': [
-            'Cette planète pourrait avoir des saisons similaires à la Terre',
-            'La présence d\'eau liquide suggère un climat stable',
-            'Une atmosphère protectrice permettrait la vie en surface',
-            'Des aurores boréales pourraient illuminer ses pôles'
+        'Earth-like': [
+            'This planet could have seasons similar to Earth',
+            'The presence of liquid water suggests a stable climate',
+            'A protective atmosphere would allow life on the surface',
+            'Aurora borealis could illuminate its poles'
         ],
-        'Super-Terre': [
-            'La gravité y serait 2 à 3 fois plus forte qu\'sur Terre',
-            'Les montagnes pourraient atteindre des hauteurs impossibles sur Terre',
-            'Un jour y durerait probablement plus longtemps',
-            'L\'atmosphère dense pourrait créer un effet de serre'
+        'Super-Earth': [
+            'Gravity would be 2 to 3 times stronger than on Earth',
+            'Mountains could reach heights impossible on Earth',
+            'A day would probably last longer',
+            'The dense atmosphere could create a greenhouse effect'
         ],
-        'Planète Océan': [
-            'Les océans pourraient être 10 fois plus profonds que sur Terre',
-            'Des formes de vie uniques pourraient vivre dans les abysses',
-            'Des geysers de glace pourraient s\'élever dans l\'espace',
-            'Pas de terre ferme, que des îles flottantes'
+        'Ocean Planet': [
+            'Oceans could be 10 times deeper than on Earth',
+            'Unique life forms could live in the abyss',
+            'Ice geysers could rise into space',
+            'No dry land, only floating islands'
         ],
-        'Jupiter Chaud': [
-            'Les vents y soufflent à plus de 2000 km/h',
-            'Il pleut du verre fondu dans son atmosphère',
-            'Un jour y dure moins de 24 heures terrestres',
-            'Sa face éclairée est 1000°C plus chaude que sa face sombre'
+        'Hot Jupiter': [
+            'Winds blow at over 2000 km/h',
+            'It rains molten glass in its atmosphere',
+            'A day lasts less than 24 Earth hours',
+            'Its lit side is 1000°C hotter than its dark side'
         ],
-        'Géante Gazeuse': [
-            'Ses anneaux s\'étendent sur des millions de kilomètres',
-            'Elle possède probablement plus de 20 lunes',
-            'Ses tempêtes durent des siècles entiers',
-            'Son champ magnétique est 10 fois plus fort que celui de Jupiter'
+        'Gas Giant': [
+            'Its rings extend for millions of kilometers',
+            'It probably has more than 20 moons',
+            'Its storms last entire centuries',
+            'Its magnetic field is 10 times stronger than Jupiter\'s'
         ],
-        'Planète Rocheuse': [
-            'Des volcans crachent encore de la lave',
-            'Les cratères racontent l\'histoire du système',
-            'Le vent sculpte des formations rocheuses étranges',
-            'Des cristaux rares pourraient briller à sa surface'
+        'Rocky Planet': [
+            'Volcanoes still spew lava',
+            'Craters tell the story of the system',
+            'Wind sculpts strange rock formations',
+            'Rare crystals could shine on its surface'
         ],
         'Mars': [
-            'Olympus Mons est le plus grand volcan du système solaire',
-            'Ses calottes polaires sont composées de glace d\'eau et de CO2',
-            'Valles Marineris s\'étend sur 4000 km de long',
-            'Des traces d\'anciens fleuves marquent sa surface',
-            'Ses tempêtes de poussière peuvent recouvrir toute la planète',
-            'Un jour martien dure 24h 37min'
+            'Olympus Mons is the largest volcano in the solar system',
+            'Its polar caps are composed of water ice and CO2',
+            'Valles Marineris extends 4000 km long',
+            'Traces of ancient rivers mark its surface',
+            'Its dust storms can cover the entire planet',
+            'A Martian day lasts 24h 37min'
         ],
-        'Vénus': [
-            'Sa pression atmosphérique écrase comme 900m sous l\'océan',
-            'Il y pleut de l\'acide sulfurique',
-            'Une journée vénusienne dure plus qu\'une année',
-            'Elle tourne dans le sens inverse des autres planètes',
-            'Sa température de 462°C fait fondre le plomb',
-            'Ses nuages cachent totalement sa surface'
+        'Venus': [
+            'Its atmospheric pressure crushes like 900m under the ocean',
+            'It rains sulfuric acid there',
+            'A Venusian day lasts longer than a year',
+            'It rotates in the opposite direction to other planets',
+            'Its temperature of 462°C melts lead',
+            'Its clouds completely hide its surface'
         ],
-        'Saturne': [
-            'Ses anneaux sont composés de milliards de particules de glace',
-            'Elle possède un hexagone parfait au pôle Nord',
-            'Sa densité est plus faible que celle de l\'eau',
-            'Titan, sa plus grande lune, a des lacs de méthane',
-            'Ses anneaux ne font que 10 mètres d\'épaisseur',
-            'Elle possède 82 lunes confirmées'
+        'Saturn': [
+            'Its rings are composed of billions of ice particles',
+            'It has a perfect hexagon at the North Pole',
+            'Its density is lower than that of water',
+            'Titan, its largest moon, has methane lakes',
+            'Its rings are only 10 meters thick',
+            'It has 82 confirmed moons'
         ]
     };
     
-    const facts = factDatabase[planetType] || ['Une planète mystérieuse aux secrets encore cachés'];
+    const facts = factDatabase[planetType] || ['A mysterious planet with secrets still hidden'];
     const numFacts = Math.min(2 + Math.floor(Math.random() * 2), facts.length);
     
     return facts.sort(() => 0.5 - Math.random()).slice(0, numFacts);
@@ -1003,7 +1003,7 @@ function scanForPlanets() {
     systemContainer.appendChild(scanEffect);
 
     const scanningText = document.createElement('div');
-    scanningText.textContent = '🔍 Analyse en cours...';
+    scanningText.textContent = '🔍 Analysis in progress...';
     scanningText.style.cssText = `
         position: absolute;
         top: 20px;
@@ -1715,7 +1715,7 @@ function getLevelQuestions(levelId) {
             },
             {
                 question: "What is the habitable zone of a star?",
-                answers: ["La zone la plus chaude", "Zone où l'eau peut être liquide", "Zone sans radiation", "Zone la plus froide"],
+                answers: ["The hottest zone", "Zone where water can be liquid", "Zone without radiation", "The coldest zone"],
                 correct: 1
             },
             {
@@ -1735,12 +1735,12 @@ function getLevelQuestions(levelId) {
             },
             {
                 question: "What can we detect in an exoplanet's atmosphere?",
-                answers: ["La couleur", "Les gaz comme l'eau", "La température du sol", "Les océans"],
+                answers: ["The color", "Gases like water", "Ground temperature", "Oceans"],
                 correct: 1
             },
             {
                 question: "How many potentially habitable exoplanets have been discovered?",
-                answers: ["Aucune", "Quelques dizaines", "Des centaines", "Des milliers"],
+                answers: ["None", "A few dozen", "Hundreds", "Thousands"],
                 correct: 1
             }
         ],
@@ -1818,12 +1818,12 @@ function getLevelQuestions(levelId) {
                 correct: 1
             },
             {
-                question: "Quel télescope spatial a révolutionné l'astronomie ?",
+                question: "Which space telescope revolutionized astronomy?",
                 answers: ["Kepler", "Spitzer", "Hubble", "James Webb"],
                 correct: 2
             },
             {
-                question: "Quelle mission a étudié Saturne pendant 13 ans ?",
+                question: "Which mission studied Saturn for 13 years?",
                 answers: ["Voyager", "Cassini", "Pioneer", "New Horizons"],
                 correct: 1
             },

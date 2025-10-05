@@ -357,3 +357,52 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# ============================================================================
+# FROSTBYTE - FICHIERS SPÉCIFIQUES À IGNORER
+# ============================================================================
+
+# Environnement virtuel du projet
+chatbot_env/
+
+# Logs et fichiers temporaires FrostByte
+*.log
+ml_backend.log
+chat_backend.log
+streamlit.log
+server.log
+nohup.out
+
+# PIDs des processus
+.ml_pid
+.chat_pid
+.streamlit_pid
+
+# Fichiers de test et debug
+test_*.log
+debug_*.log
+deps_test.log
+streamlit_test.log
+*_test.log
+*_debug.log
+
+# Modèles et données temporaires
+*_backup.pkl
+*_temp.pkl
+temp_model/
+backup_models/
+temp_data/
+cache_data/
+
+# Rapports temporaires (garder les principaux)
+RAPPORT_TEST_*.md
+DEBUG_*.md
+*_backup.md
+
+# Configuration temporaire
+config_temp.js
+settings_temp.json
+
+# Systèmes d'exploitation
+.DS_Store
+Thumbs.db
