@@ -1,0 +1,33 @@
+{
+  "name": "chatbot_ollama",
+  "version": "1.0.0",
+  "description": "Le Chatbot avec Ollama est une mini-API qui & été réalisé avec un modèle pré-entraîné appelé \"Promis\", une version revue de \"Mistral\", celui-ci proposant des services plus aigus et adaptés au cadre informatique. Ce projet est structuré en trois parties essentielles à savoir:     |-- Script python pour installer les dépendances(En l'occurence, installer d'abord le modèle Mistral de Ollama)     |-- .venv (Environnement virtuel utilisé pour assurer que les données soient protégées et plus failes à exporter)     |    |--bin     |    |--etc     |    |--lib     |- Chat minimal créé     |",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Promis229/Chatbot_ollama.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Promis229/Chatbot_ollama/issues"
+  },
+  "homepage": "https://github.com/Promis229/Chatbot_ollama#readme",
+  "dependencies": {
+    "axios": "^1.12.2",
+    "body-parser": "^2.2.0",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "groq-sdk": "^0.33.0",
+    "node-fetch": "^3.3.2",
+    "ollama": "^0.6.0",
+    "openai": "^6.1.0"
+  }
+}

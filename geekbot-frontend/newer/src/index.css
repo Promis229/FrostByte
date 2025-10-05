@@ -1,0 +1,58 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background-color: #1e688a;
+}
+
+header h1, .main-title {
+  @apply text-[70rem] font-extrabold text-white text-center drop-shadow-2xl leading-tight;
+  position: absolute;
+  top: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  pointer-events: none;
+}
+
+button {
+  @apply rounded-md px-4 py-2 transition-all;
+}
+
+button:hover {
+  @apply ring-2 ring-blue-400;
+}
+
+input {
+  @apply rounded-3xl px-24 py-8 text-[4rem] border-4 border-blue-300 bg-blue-800 text-white focus:outline-none focus:ring-8 focus:ring-blue-200 placeholder-blue-200;
+  box-shadow: 0 0 40px rgba(59, 130, 246, 0.8);
+  min-height: 6rem;
+  width: 100%;
+}
+
+.message-user {
+  @apply self-end bg-blue-500 text-white p-5 rounded-3xl max-w-2xl break-words text-2xl;
+}
+
+.message-bot {
+  @apply self-start bg-blue-700 text-white p-5 rounded-3xl max-w-2xl break-words text-2xl;
+}
+
+.input-container {
+  @apply w-full max-w-7xl mx-auto flex items-center justify-center p-10;
+  position: fixed;
+  bottom: 12vh;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 30;
+  background: rgba(30, 113, 138, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 2rem;
+  border: 2px solid rgba(59, 130, 246, 0.3);
+}
+
+.send-button {
+  @apply ml-10 bg-blue-400 hover:bg-blue-300 text-blue-900 p-14 rounded-full transition-colors;
+  box-shadow: 0 0 10px rgba(59, 130, 246, 0.6);
+}
