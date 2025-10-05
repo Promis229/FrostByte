@@ -1,0 +1,30 @@
+{
+  "name": "cosmo-space-game",
+  "version": "1.0.0",
+  "description": "🌌 Cosmo - Gamified educational platform to learn astronomy and exoplanets",
+  "main": "index.html",
+  "scripts": {
+    "start": "python3 -m http.server 8080",
+    "serve": "python3 -m http.server 8080"
+  },
+  "keywords": [
+    "education",
+    "astronomy",
+    "exoplanets",
+    "game",
+    "space",
+    "learning",
+    "interactive",
+    "gamification"
+  ],
+  "author": "FrostByte Team",
+  "license": "MIT",
+  "homepage": "./",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Promis229/FrostByte"
+  },
+  "bugs": {
+    "url": "https://github.com/Promis229/FrostByte/issues"
+  }
+}

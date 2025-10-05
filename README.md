@@ -1,2 +1,0 @@
-# FrostByte
-Nasa challenge
