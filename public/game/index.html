@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" c                        <span>Start Adventure</span>ntent="width=device-width, initial-scale=1.0">
+    <title>🌌 Cosmo - Space Exploration</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    
+    <div class="starfield" id="starfield"></div>
+    
+    
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-content">
+            <div class="space-logo">
+                <i class="fas fa-rocket rocket-animation"></i>
+                <h1 class="logo-text">Cosmo</h1>
+            </div>
+            <div class="loading-bar">
+                <div class="loading-progress" id="loadingProgress"></div>
+            </div>
+            <p class="loading-text" id="loadingText">Initializing stellar systems...</p>
+            
+            
+            <button id="skipLoading" style="
+                position: absolute;
+                bottom: 20px;
+                right: 20px;
+                background: rgba(255,255,255,0.1);
+                border: 1px solid rgba(255,255,255,0.3);
+                color: white;
+                padding: 10px 15px;
+                border-radius: 5px;
+                cursor: pointer;
+                font-size: 12px;
+                opacity: 0.7;
+            " onclick="skipToMainMenu()">Skip Loading</button>
+        </div>
+    </div>
+
+    
+    <div class="game-container" id="gameContainer">
+        
+        <div class="hud-top">
+            <div class="player-stats">
+                <div class="stat-item">
+                    <i class="fas fa-star"></i>
+                    <span>Level <span id="playerLevel">1</span></span>
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-coins"></i>
+                    <span id="playerCoins">0</span> Stardust
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-globe"></i>
+                    <span id="planetsFound">0</span> Planètes
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-trophy"></i>
+                    <span id="playerScore">0</span> Points
+                </div>
+                <div class="stat-item audio-control">
+                    <i class="fas fa-volume-up" id="audioIcon"></i>
+                    <input type="range" id="volumeSlider" min="0" max="100" value="30" title="Volume">
+                </div>
+            </div>
+            <div class="xp-bar">
+                <div class="xp-fill" id="xpFill" style="width: 0%"></div>
+                <span class="xp-text"><span id="currentXP">0</span>/<span id="maxXP">100</span> XP</span>
+            </div>
+        </div>
+
+        
+        <div class="screen" id="mainMenu">
+            <div class="main-menu-content">
+                <div class="title-section">
+                    <h1 class="game-title">
+                        <i class="fas fa-rocket title-icon"></i>
+                        Cosmo
+                        <span class="title-subtitle">Exploration Spatiale</span>
+                    </h1>
+                    <p class="game-description">
+                        Embarquez dans une aventure spatiale épique avec Cosmo ! Découvrez les secrets de l'univers, 
+                        explorez les exoplanètes et devenez le plus grand explorateur galactique !
+                    </p>
+                </div>
+
+                <div class="menu-buttons">
+                    <button class="menu-btn primary" onclick="startGame()">
+                        <i class="fas fa-play"></i>
+                        <span>Start Aventure</span>
+                    </button>
+                    <button class="menu-btn secondary" onclick="showGalacticPath()">
+                        <i class="fas fa-route"></i>
+                        <span>Galactic Path</span>
+                    </button>
+                    <button class="menu-btn secondary" onclick="showTutorial()">
+                        <i class="fas fa-book"></i>
+                        <span>Space Guide</span>
+                    </button>
+                </div>
+
+                <div class="achievements-preview">
+                    <h3><i class="fas fa-medal"></i> Recent Achievements</h3>
+                    <div class="achievement-list" id="recentAchievements">
+                        <div class="achievement-item locked">
+                            <i class="fas fa-lock"></i>
+                            <span>First Step in Space</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+        <div class="screen hidden" id="gameScreen">
+            <div class="game-content">
+                
+                <div class="space-map" id="spaceMap">
+                    <div class="map-header">
+                        <h3><i class="fas fa-map"></i> Galactic Map</h3>
+                        <div class="map-controls">
+                            <button class="map-btn" onclick="scanForPlanets()">
+                                <i class="fas fa-search"></i> Scan
+                            </button>
+                            <button class="map-btn" onclick="showQuiz()">
+                                <i class="fas fa-brain"></i> Astro Quiz
+                            </button>
+                            <button class="map-btn" onclick="showSolarSystem()">
+                                <i class="fas fa-sun"></i> Solar System
+                            </button>
+                        </div>
+                    </div>
+                    <div class="stellar-system" id="stellarSystem">
+                        
+                    </div>
+                </div>
+
+                
+                <div class="knowledge-panel">
+                    <div class="panel-header">
+                        <h3><i class="fas fa-book-open"></i> Exploration Journal</h3>
+                        <button class="minimize-btn" onclick="togglePanel('knowledge-panel')">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                    </div>
+                    <div class="knowledge-content" id="knowledgeContent">
+                        <div class="knowledge-entry">
+                            <h4><i class="fas fa-info-circle"></i> Did you know?</h4>
+                            <p>Exoplanets are planets that orbit stars other than our Sun!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+        <div class="screen hidden" id="galacticPathScreen">
+            <div class="galactic-path-container">
+                <div class="path-header">
+                    <h2><i class="fas fa-route"></i> Galactic Path</h2>
+                    <p>Explore the universe level by level! Each level contains 10 questions about astronomy.</p>
+                    <button class="btn secondary back-btn" onclick="showMainMenu()">
+                        <i class="fas fa-arrow-left"></i> Back
+                    </button>
+                </div>
+                
+                <div class="levels-container">
+                    <div class="galaxy-path">
+                        <div class="level-node completed" data-level="1" onclick="startLevel(1)">
+                            <div class="level-number">1</div>
+                            <div class="level-title">Solar System</div>
+                            <div class="level-stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="path-connector"></div>
+                        
+                        <div class="level-node available" data-level="2" onclick="startLevel(2)">
+                            <div class="level-number">2</div>
+                            <div class="level-title">Rocky Planets</div>
+                            <div class="level-stars">
+                                <i class="far fa-star"></i>
+                                <i class="far fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="path-connector"></div>
+                        
+                        <div class="level-node locked" data-level="3">
+                            <div class="level-number">3</div>
+                            <div class="level-title">Gas Giants</div>
+                            <div class="level-lock"><i class="fas fa-lock"></i></div>
+                        </div>
+                        
+                        <div class="path-connector"></div>
+                        
+                        <div class="level-node locked" data-level="4">
+                            <div class="level-number">4</div>
+                            <div class="level-title">Asteroids & Comets</div>
+                            <div class="level-lock"><i class="fas fa-lock"></i></div>
+                        </div>
+                        
+                        <div class="path-connector"></div>
+                        
+                        <div class="level-node locked" data-level="5">
+                            <div class="level-number">5</div>
+                            <div class="level-title">Exoplanets</div>
+                            <div class="level-lock"><i class="fas fa-lock"></i></div>
+                        </div>
+                        
+                        <div class="path-connector"></div>
+                        
+                        <div class="level-node locked" data-level="6">
+                            <div class="level-number">6</div>
+                            <div class="level-title">Stars & Galaxies</div>
+                            <div class="level-lock"><i class="fas fa-lock"></i></div>
+                        </div>
+                        
+                        <div class="path-connector"></div>
+                        
+                        <div class="level-node locked" data-level="7">
+                            <div class="level-number">7</div>
+                            <div class="level-title">NASA Missions</div>
+                            <div class="level-lock"><i class="fas fa-lock"></i></div>
+                        </div>
+                        
+                        <div class="path-connector"></div>
+                        
+                        <div class="level-node locked" data-level="8">
+                            <div class="level-number">8</div>
+                            <div class="level-title">Black Holes</div>
+                            <div class="level-lock"><i class="fas fa-lock"></i></div>
+                        </div>
+                        
+                        <div class="path-connector"></div>
+                        
+                        <div class="level-node locked" data-level="9">
+                            <div class="level-number">9</div>
+                            <div class="level-title">Cosmology</div>
+                            <div class="level-lock"><i class="fas fa-lock"></i></div>
+                        </div>
+                        
+                        <div class="path-connector"></div>
+                        
+                        <div class="level-node locked" data-level="10">
+                            <div class="level-number">10</div>
+                            <div class="level-title">Galactic Master</div>
+                            <div class="level-lock"><i class="fas fa-lock"></i></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+        <div class="screen hidden" id="quizScreen">
+            <div class="quiz-container">
+                <div class="quiz-header">
+                    <h2 id="quizTitle"><i class="fas fa-brain"></i> Level 1 - Solar System</h2>
+                    <div class="quiz-progress">
+                        <span>Question <span id="questionNumber">1</span>/10</span>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="quizProgress" style="width: 10%"></div>
+                        </div>
+                    </div>
+                    <button class="btn secondary back-btn" onclick="showGalacticPath()">
+                        <i class="fas fa-arrow-left"></i> Back aux Levelx
+                    </button>
+                </div>
+                
+                <div class="quiz-content">
+                    <div class="question-card">
+                        <h3 id="questionText">Quelle est la planète la plus proche du Soleil ?</h3>
+                        <div class="answers-grid" id="answersGrid">
+                            
+                        </div>
+                    </div>
+                </div>
+
+                <div class="quiz-footer">
+                    <button class="btn secondary" onclick="skipQuestion()" id="skipBtn">
+                        <i class="fas fa-forward"></i> Passer
+                    </button>
+                    <div class="quiz-score">
+                        <span>Score: <span id="quizScore">0</span>/10</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+        <div class="screen hidden" id="tutorialScreen">
+            <div class="tutorial-container">
+                <div class="tutorial-header">
+                    <h2><i class="fas fa-graduation-cap"></i> Guide du Chasseur d'Exoplanets</h2>
+                    <button class="close-btn" onclick="hideTutorial()">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                
+                <div class="tutorial-content">
+                    <div class="tutorial-step active" data-step="1">
+                        <div class="step-content">
+                            <h3><i class="fas fa-rocket"></i> Bienvenue, Chasseur !</h3>
+                            <p>Vous êtes sur le point de devenir un explorateur spatial ! Votre mission : découvrir et étudier les exoplanètes à travers la galaxie.</p>
+                            <div class="tutorial-image">
+                                <i class="fas fa-globe-americas tutorial-icon"></i>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tutorial-step" data-step="2">
+                        <div class="step-content">
+                            <h3><i class="fas fa-search"></i> Scan l'Espace</h3>
+                            <p>Utilisez votre scanner pour détecter les planètes autour des étoiles. Chaque scan vous coûte de l'énergie mais peut révéler des trésors cachés !</p>
+                            <div class="tutorial-image">
+                                <i class="fas fa-satellite tutorial-icon"></i>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tutorial-step" data-step="3">
+                        <div class="step-content">
+                            <h3><i class="fas fa-brain"></i> Apprendre et Progresser</h3>
+                            <p>Répondez aux quiz pour gagner de l'XP et du Stardust. Plus vous en savez sur l'astronomie, plus vous devenez efficace !</p>
+                            <div class="tutorial-image">
+                                <i class="fas fa-star tutorial-icon"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tutorial-navigation">
+                    <button class="btn secondary" id="prevBtn" onclick="previousTutorialStep()" disabled>
+                        <i class="fas fa-chevron-left"></i> Previous
+                    </button>
+                    <div class="step-indicators">
+                        <span class="step-dot active" data-step="1"></span>
+                        <span class="step-dot" data-step="2"></span>
+                        <span class="step-dot" data-step="3"></span>
+                    </div>
+                    <button class="btn primary" id="nextBtn" onclick="nextTutorialStep()">
+                        Next <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        
+        <div class="modal hidden" id="planetModal">
+            <div class="modal-content planet-discovery">
+                <div class="discovery-animation">
+                    <i class="fas fa-globe planet-icon"></i>
+                    <div class="discovery-particles"></div>
+                </div>
+                <h2>🎉 Nouvelle Planète Découverte !</h2>
+                <div class="planet-info" id="discoveredPlanetInfo">
+                    
+                </div>
+                <div class="rewards">
+                    <h3><i class="fas fa-gift"></i> Récompenses</h3>
+                    <div class="reward-items">
+                        <div class="reward-item">
+                            <i class="fas fa-star"></i>
+                            <span>+50 XP</span>
+                        </div>
+                        <div class="reward-item">
+                            <i class="fas fa-coins"></i>
+                            <span>+25 Stardust</span>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn primary" onclick="closePlanetModal()">
+                    Continue l'Exploration
+                </button>
+            </div>
+        </div>
+
+        
+        <div class="achievement-notification hidden" id="achievementNotification">
+            <div class="achievement-content">
+                <i class="fas fa-trophy"></i>
+                <div class="achievement-text">
+                    <h4>Nouvel Exploit Débloqué !</h4>
+                    <span id="achievementName">First Step in Space</span>
+                </div>
+            </div>
+        </div>
+
+        
+        <div class="screen hidden" id="solarSystemScreen">
+            <div class="solar-system-container">
+                <div class="solar-system-header">
+                    <h2><i class="fas fa-sun"></i> Explorateur du Solar System</h2>
+                    <button class="close-btn" onclick="hideSolarSystem()">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                
+                <div class="solar-system-content">
+                    <div class="solar-system" id="solarSystem">
+                        <div class="sun" id="sun">
+                            <div class="sun-core"></div>
+                            <div class="sun-glow"></div>
+                        </div>
+                        
+                    </div>
+                    
+                    
+                    <div class="planet-info-overlay hidden" id="planetInfoOverlay">
+                        <div class="planet-info-content">
+                            <div class="planet-image-container">
+                                <img id="planetInfoImage" src="" alt="">
+                                <div class="planet-glow-effect"></div>
+                            </div>
+                            <div class="planet-details">
+                                <h3 id="planetInfoName"></h3>
+                                <div class="planet-stats">
+                                    <div class="stat-item">
+                                        <i class="fas fa-thermometer-half"></i>
+                                        <span class="stat-label">Température</span>
+                                        <span class="stat-value" id="planetTemperature"></span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <i class="fas fa-ruler"></i>
+                                        <span class="stat-label">Distance du Soleil</span>
+                                        <span class="stat-value" id="planetDistance"></span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <i class="fas fa-globe"></i>
+                                        <span class="stat-label">Composition</span>
+                                        <span class="stat-value" id="planetComposition"></span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <i class="fas fa-weight"></i>
+                                        <span class="stat-label">Gravité</span>
+                                        <span class="stat-value" id="planetGravity"></span>
+                                    </div>
+                                </div>
+                                <div class="fun-fact">
+                                    <i class="fas fa-lightbulb"></i>
+                                    <p id="planetFunFact"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="solar-system-controls">
+                    <button class="btn secondary" onclick="showMainGame()">
+                        <i class="fas fa-arrow-left"></i> Back au Jeu
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <audio id="backgroundMusic" loop>
+        <source src="sounds/space-ambient.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="scanSound">
+        <source src="sounds/scan.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="discoverySound">
+        <source src="sounds/discovery.mp3" type="audio/mpeg">
+    </audio>
+
+    <script src="game.js"></script>
+    <script src="cosmo-guide.js"></script>
+</body>
+</html>
