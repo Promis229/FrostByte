@@ -7,9 +7,9 @@
   "scripts": {
     "start": "node server.js",
     "test": "node server_test.js",
-    "build": "echo 'Build successful - Static site ready'",
+    "build": "mkdir -p public && cp index.html public/ && cp -r game public/ && cp chatbot_test.html public/",
     "deploy": "./deploy.sh",
-    "vercel-build": "echo 'Vercel build complete'"
+    "vercel-build": "mkdir -p public && cp index.html public/ && cp -r game public/ && cp chatbot_test.html public/ && echo 'Vercel build complete'"
   },
   "repository": {
     "type": "git",
