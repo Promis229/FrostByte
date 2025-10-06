@@ -1,42 +1,20 @@
 {
-  "builds": [
+  "rewrites": [
     {
-      "src": "server_test.js",
-      "use": "@vercel/node"
+      "source": "/api/(.*)",
+      "destination": "/server_test.js"
+    },
+    {
+      "source": "/game/(.*)",
+      "destination": "/game/$1"
+    },
+    {
+      "source": "/chatbot",
+      "destination": "/chatbot_test.html"
+    },
+    {
+      "source": "/",
+      "destination": "/index.html"
     }
-  ],
-  "routes": [
-    {
-      "src": "/api/chat",
-      "dest": "/server_test.js"
-    },
-    {
-      "src": "/api/test",
-      "dest": "/server_test.js"
-    },
-    {
-      "src": "/game/(.*)",
-      "dest": "/game/$1"
-    },
-    {
-      "src": "/chatbot",
-      "dest": "/chatbot_test.html"
-    },
-    {
-      "src": "/dashboard",
-      "dest": "https://frostbyte-dashboard.vercel.app"
-    },
-    {
-      "src": "/",
-      "dest": "/index.html"
-    }
-  ],
-  "functions": {
-    "server_test.js": {
-      "maxDuration": 30
-    }
-  },
-  "env": {
-    "GROQ_API_KEY": "@groq_api_key"
-  }
+  ]
 }
