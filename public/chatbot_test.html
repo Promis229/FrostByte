@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -182,22 +182,22 @@
     <div class="container">
         <div class="header">
             <h1>🌌 FrostByte Chatbot</h1>
-            <p>Assistant IA spécialisé en exoplanètes</p>
+            <p>AI Assistant specialized in exoplanets</p>
         </div>
         
         <div id="status" class="status offline">
-            🔄 Vérification de la connexion...
+            🔄 Checking connection...
         </div>
         
         <div class="test-buttons">
-            <button class="test-btn" onclick="testQuestions('Bonjour!')">👋 Saluer</button>
-            <button class="test-btn" onclick="testQuestions('Qu\'est-ce qu\'une exoplanète?')">🌍 Exoplanètes</button>
-            <button class="test-btn" onclick="testQuestions('Comment vérifier si c\'est une exoplanète?')">🔬 Vérification</button>
-            <button class="test-btn" onclick="testWithRandomData()">📊 Test ML</button>
+            <button class="test-btn" onclick="testQuestions('Hello!')">👋 Greet</button>
+            <button class="test-btn" onclick="testQuestions('What is an exoplanet?')">🌍 Exoplanets</button>
+            <button class="test-btn" onclick="testQuestions('How to verify if it\'s an exoplanet?')">🔬 Verification</button>
+            <button class="test-btn" onclick="testWithRandomData()">📊 ML Test</button>
         </div>
         
         <div class="features-section">
-            <h3>🔬 Données d'analyse ML (optionnel)</h3>
+            <h3>🔬 ML Analysis Data (optional)</h3>
             <div class="features-grid">
                 <input type="number" placeholder="Disposition" id="feature0" step="0.1">
                 <input type="number" placeholder="Score" id="feature1" step="0.1">
@@ -215,13 +215,13 @@
         <div class="chat-container">
             <div class="messages" id="messages">
                 <div class="bot-message message">
-                    🌌 Salut ! Je suis l'assistant FrostByte. Pose-moi des questions sur les exoplanètes ou teste mes fonctionnalités avec les boutons ci-dessus !
+                    🌌 Hello! I'm the FrostByte assistant. Ask me questions about exoplanets or test my features with the buttons above!
                 </div>
             </div>
             
             <div class="input-container">
-                <input type="text" id="messageInput" placeholder="Posez votre question sur les exoplanètes..." onkeypress="handleKeyPress(event)">
-                <button onclick="sendMessage()" id="sendBtn">Envoyer</button>
+                <input type="text" id="messageInput" placeholder="Ask your question about exoplanets..." onkeypress="handleKeyPress(event)">
+                <button onclick="sendMessage()" id="sendBtn">Send</button>
             </div>
         </div>
     </div>
@@ -237,11 +237,11 @@
                 const data = await response.json();
                 isOnline = true;
                 document.getElementById('status').className = 'status online';
-                document.getElementById('status').innerHTML = '✅ Serveurs connectés: Chat + ML';
+                document.getElementById('status').innerHTML = '✅ Servers connected: Chat + ML';
             } catch (error) {
                 isOnline = false;
                 document.getElementById('status').className = 'status offline';
-                document.getElementById('status').innerHTML = '❌ Serveurs hors ligne';
+                document.getElementById('status').innerHTML = '❌ Servers offline';
             }
         }
 
@@ -309,7 +309,7 @@
                 addMessage(data.response);
                 
             } catch (error) {
-                addMessage(`❌ Erreur: ${error.message}. Vérifiez que les serveurs sont démarrés.`);
+                addMessage(`❌ Error: ${error.message}. Check that servers are running.`);
             }
             
             // Réactiver l'interface
@@ -330,7 +330,7 @@
             for (let i = 0; i < 10; i++) {
                 document.getElementById(`feature${i}`).value = (Math.random() * 5).toFixed(2);
             }
-            testQuestions('Analyse ces données pour détecter une exoplanète');
+            testQuestions('Analyze this data to detect an exoplanet');
         }
 
         // Gestion de la touche Entrée
