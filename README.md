@@ -1,179 +1,179 @@
-# 🌌 FrostByte - Écosystème d'Exploration Spatiale
+# 🌌 FrostByte - Space Exploration Ecosystem
 
-[![Licence](https://img.shields.io/badge/licence-MIT-blue.svg)](LICENSE)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Python](https://img.shields.io/badge/python-3.12+-green.svg)](https://python.org)
 [![Node.js](https://img.shields.io/badge/node.js-18+-green.svg)](https://nodejs.org)
-[![Status](https://img.shields.io/badge/status-Opérationnel-brightgreen.svg)](#)
+[![Status](https://img.shields.io/badge/status-Operational-brightgreen.svg)](#)
 
-> **Plateforme interactive complète d'apprentissage et d'exploration spatiale intégrant IA, Machine Learning et gaming éducatif.**
+> **Complete interactive platform for space learning and exploration integrating AI, Machine Learning, and educational gaming.**
 
 ---
 
-## 🚀 Vue d'Ensemble
+## 🚀 Overview
 
-FrostByte est un écosystème complet qui combine :
-- 🎮 **Jeu éducatif Cosmo** - Exploration spatiale interactive
-- 🤖 **Chatbot IA multilingue** - Assistant spécialisé en exoplanètes
-- 📊 **Dashboard ML** - Prédiction d'exoplanètes avec Streamlit
-- 🔬 **Modèles d'apprentissage automatique** - Analyse de données NASA
+FrostByte is a comprehensive ecosystem that combines:
+- 🎮 **Cosmo Educational Game** - Interactive space exploration
+- 🤖 **Multilingual AI Chatbot** - Exoplanet specialist assistant
+- 📊 **ML Dashboard** - Exoplanet prediction with Streamlit
+- 🔬 **Machine Learning Models** - NASA data analysis
 
-## 📁 Structure du Projet
+## 📁 Project Structure
 
 ```
 FrostByte/
-├── 🎮 GAME/                     # Jeu Cosmo
-│   ├── index.html               # Interface principale
-│   ├── game.js                  # Logique du jeu
-│   ├── cosmo-guide.js          # Guide et tutoriels
-│   ├── styles.css              # Styles et animations
-│   └── images/                 # Assets planétaires
-├── 🤖 CHATBOT IA/              # Assistant IA
-│   ├── chatbot_terminal.py     # Version terminal (Ollama)
-│   ├── chatbot_terminal_test.py # Version API
-│   ├── chatbot_test.html       # Interface web de test
-│   ├── server.js               # Backend production (Groq)
-│   ├── server_test.js          # Backend test (mock)
-│   └── chatbot_env/            # Environnement virtuel Python
-├── 📊 DASHBOARD/               # Interface de prédiction
-│   ├── dashboard.py            # Application Streamlit
-│   ├── model.ipynb            # Notebook d'analyse
-│   └── one_eda.ipynb          # Analyse exploratoire
-├── 🔬 MACHINE LEARNING/        # Modèles et données
-│   ├── back.py                 # API Flask ML
-│   ├── best_exoplanet_model.pkl # Modèle Random Forest
-│   ├── exoplanet_scaler.pkl   # Normalisation
-│   ├── exoplanet_label_encoder.pkl # Encodage
-│   ├── datas.csv              # Dataset brut NASA
-│   └── datas_cleaned.csv      # Dataset nettoyé
-├── 🧪 TESTS/                   # Scripts de validation
-│   ├── test_api.sh            # Test API ML
-│   ├── test_chatbot.sh        # Test chatbot complet
-│   └── test_ml_api.py         # Test Python ML
+├── 🎮 GAME/                     # Cosmo Game
+│   ├── index.html               # Main interface
+│   ├── game.js                  # Game logic
+│   ├── cosmo-guide.js          # Guide and tutorials
+│   ├── styles.css              # Styles and animations
+│   └── images/                 # Planetary assets
+├── 🤖 AI CHATBOT/              # AI Assistant
+│   ├── chatbot_terminal.py     # Terminal version (Ollama)
+│   ├── chatbot_terminal_test.py # API version
+│   ├── chatbot_test.html       # Web test interface
+│   ├── server.js               # Production backend (Groq)
+│   ├── server_test.js          # Test backend (mock)
+│   └── chatbot_env/            # Python virtual environment
+├── 📊 DASHBOARD/               # Prediction interface
+│   ├── dashboard.py            # Streamlit application
+│   ├── model.ipynb            # Analysis notebook
+│   └── one_eda.ipynb          # Exploratory analysis
+├── 🔬 MACHINE LEARNING/        # Models and data
+│   ├── back.py                 # Flask ML API
+│   ├── best_exoplanet_model.pkl # Random Forest model
+│   ├── exoplanet_scaler.pkl   # Normalization
+│   ├── exoplanet_label_encoder.pkl # Encoding
+│   ├── datas.csv              # Raw NASA dataset
+│   └── datas_cleaned.csv      # Cleaned dataset
+├── 🧪 TESTS/                   # Validation scripts
+│   ├── test_api.sh            # ML API test
+│   ├── test_chatbot.sh        # Complete chatbot test
+│   └── test_ml_api.py         # Python ML test
 ├── ⚙️ CONFIG/                  # Configuration
-│   ├── package.json           # Dépendances Node.js
-│   ├── .env                   # Variables d'environnement
-│   └── requirements.txt       # Dépendances Python (dans chatbot_env)
+│   ├── package.json           # Node.js dependencies
+│   ├── .env                   # Environment variables
+│   └── requirements.txt       # Python dependencies (in chatbot_env)
 └── 📚 DOCS/                    # Documentation
-    ├── README.md              # Ce fichier
-    └── RAPPORT_TEST.md        # Rapport de tests détaillé
+    ├── README.md              # This file
+    └── RAPPORT_TEST.md        # Detailed test report
 ```
 
 ---
 
-## 🎯 Composants Principaux
+## 🎯 Main Components
 
-### 1. 🎮 Jeu Cosmo - Exploration Spatiale
+### 1. 🎮 Cosmo Game - Space Exploration
 
-**Description** : Jeu éducatif interactif d'exploration de l'espace avec système de progression.
+**Description**: Interactive educational space exploration game with progression system.
 
-**Fonctionnalités** :
-- ✅ Exploration galactique avec scan de planètes
-- ✅ Quiz multi-niveaux d'astronomie (10 niveaux)
-- ✅ Système de progression XP/Stardust
-- ✅ Simulateur du système solaire interactif
-- ✅ Découverte d'exoplanètes avec récompenses
-- ✅ Interface moderne avec animations spatiales
+**Features**:
+- ✅ Galactic exploration with planet scanning
+- ✅ Multi-level astronomy quiz (10 levels)
+- ✅ XP/Stardust progression system
+- ✅ Interactive solar system simulator
+- ✅ Exoplanet discovery with rewards
+- ✅ Modern interface with space animations
 
-**Technologies** : HTML5, CSS3, JavaScript ES6, Font Awesome
+**Technologies**: HTML5, CSS3, JavaScript ES6, Font Awesome
 
-### 2. 🤖 Chatbot IA FrostByte
+### 2. 🤖 FrostByte AI Chatbot
 
-**Description** : Assistant intelligent multilingue spécialisé en exoplanètes et astronomie.
+**Description**: Multilingual intelligent assistant specialized in exoplanets and astronomy.
 
-**Fonctionnalités** :
-- ✅ Interface web moderne avec tests rapides
-- ✅ Version terminal interactive
-- ✅ Détection automatique de langue (langdetect)
-- ✅ Traduction temps réel (Google Translator)
-- ✅ Intégration ML pour analyse d'exoplanètes
-- ✅ Réponses contextuelles avec emojis
-- ✅ Guide de vérification d'exoplanètes
+**Features**:
+- ✅ Modern web interface with quick tests
+- ✅ Interactive terminal version
+- ✅ Automatic language detection (langdetect)
+- ✅ Real-time translation (Google Translator)
+- ✅ ML integration for exoplanet analysis
+- ✅ Contextual responses with emojis
+- ✅ Exoplanet verification guide
 
-**Technologies** : Node.js, Express, Python, Flask, Groq API
+**Technologies**: Node.js, Express, Python, Flask, Groq API
 
-### 3. 📊 Dashboard Kepler - Prédiction ML
+### 3. 📊 Kepler Dashboard - ML Prediction
 
-**Description** : Interface web avancée pour prédire et analyser les exoplanètes.
+**Description**: Advanced web interface for predicting and analyzing exoplanets.
 
-**Fonctionnalités** :
-- ✅ Interface Streamlit interactive
-- ✅ Prédiction temps réel (Confirmed/Candidate/False Positive)
-- ✅ Visualisations interactives (Plotly)
-- ✅ Exemples prédéfinis et génération aléatoire
-- ✅ Graphiques radar de profil planétaire
-- ✅ Métriques détaillées et probabilités
+**Features**:
+- ✅ Interactive Streamlit interface
+- ✅ Real-time prediction (Confirmed/Candidate/False Positive)
+- ✅ Interactive visualizations (Plotly)
+- ✅ Predefined examples and random generation
+- ✅ Planetary profile radar charts
+- ✅ Detailed metrics and probabilities
 
-**Technologies** : Python, Streamlit, Plotly, Pandas
+**Technologies**: Python, Streamlit, Plotly, Pandas
 
 ### 4. 🔬 Machine Learning Engine
 
-**Description** : Système d'apprentissage automatique pour classification d'exoplanètes.
+**Description**: Machine learning system for exoplanet classification.
 
-**Fonctionnalités** :
-- ✅ Modèle Random Forest optimisé (~95% précision)
-- ✅ API REST Flask pour prédictions
-- ✅ Feature engineering avancé
-- ✅ Normalisation et encodage automatique
-- ✅ Dataset NASA Kepler nettoyé
+**Features**:
+- ✅ Optimized Random Forest model (~95% accuracy)
+- ✅ Flask REST API for predictions
+- ✅ Advanced feature engineering
+- ✅ Automatic normalization and encoding
+- ✅ Cleaned NASA Kepler dataset
 
-**Technologies** : scikit-learn, Flask, NumPy, Pandas
+**Technologies**: scikit-learn, Flask, NumPy, Pandas
 
 ---
 
-## 🚀 Installation et Configuration
+## 🚀 Installation and Configuration
 
-### Prérequis
+### Prerequisites
 
 ```bash
-# Système requis
+# System requirements
 - Python 3.12+
 - Node.js 18+
 - Git
-- Navigateur web moderne
+- Modern web browser
 
-# Optionnel pour version complète
-- Groq API Key (pour IA avancée)
-- Ollama (pour chatbot terminal local)
+# Optional for full version
+- Groq API Key (for advanced AI)
+- Ollama (for local terminal chatbot)
 ```
 
-### Installation Rapide
+### Quick Installation
 
 ```bash
-# 1. Cloner le projet
+# 1. Clone the project
 git clone https://github.com/Promis229/FrostByte.git
 cd FrostByte
 
-# 2. Installer les dépendances Node.js
+# 2. Install Node.js dependencies
 npm install
 
-# 3. Créer l'environnement Python
+# 3. Create Python environment
 python3 -m venv chatbot_env
 source chatbot_env/bin/activate
 pip install flask numpy scikit-learn requests deep-translator langdetect streamlit plotly joblib
 
-# 4. Configuration (optionnel)
+# 4. Configuration (optional)
 cp .env.example .env
-# Éditer .env avec vos clés API
+# Edit .env with your API keys
 ```
 
-### 🎯 Démarrage Ultra-Rapide
+### 🎯 Ultra-Fast Startup
 
 ```bash
-# Option 1: Script automatique (RECOMMANDÉ)
+# Option 1: Automatic script (RECOMMENDED)
 ./start_frostbyte.sh
 
-# Option 2: Test complet d'abord
+# Option 2: Test first
 ./test_complete.sh
 ./start_frostbyte.sh
 
-# Option 3: Arrêt propre
+# Option 3: Clean shutdown
 ./stop_frostbyte.sh
 ```
 
-### Configuration Environnement
+### Environment Configuration
 
 ```bash
-# Fichier .env (optionnel)
+# .env file (optional)
 GROQ_API_KEY=your_groq_api_key_here
 PORT=5000
 ML_PORT=5001
@@ -181,29 +181,29 @@ ML_PORT=5001
 
 ---
 
-## 🎮 Comment Tester le Projet
+## 🎮 How to Test the Project
 
-### � Méthode Recommandée - Démarrage Automatique
+### � Recommended Method - Automatic Startup
 
 ```bash
-# 1. Test complet de l'environnement
+# 1. Complete environment test
 ./test_complete.sh
 
-# 2. Démarrage de tous les services
+# 2. Start all services
 ./start_frostbyte.sh
-# ✅ Ouvre automatiquement toutes les interfaces dans le navigateur
+# ✅ Automatically opens all interfaces in browser
 
-# 3. Arrêt propre (quand terminé)
+# 3. Clean shutdown (when finished)
 ./stop_frostbyte.sh
 ```
 
-**Cette méthode démarre automatiquement :**
+**This method automatically starts :**
 - 🤖 Backend ML (Port 5001)
 - 💬 Backend Chat (Port 5000)  
 - 📊 Dashboard Streamlit (Port 8501)
-- 🌐 Ouvre les interfaces web dans le navigateur
+- 🌐 Opens web interfaces in browser
 
-### 🎯 Test Complet - Démarrage Manuel des Services
+### 🎯 Complete Test - Manual Service Startup
 
 ```bash
 # Terminal 1: Backend ML (Port 5001)
@@ -217,82 +217,82 @@ node server_test.js
 source chatbot_env/bin/activate
 streamlit run dashboard.py
 
-# Terminal 4: Tests automatisés
+# Terminal 4: Automated tests
 ./test_api.sh
 ./test_chatbot.sh
 ```
 
-### 🎮 1. Tester le Jeu Cosmo
+### 🎮 1. Test Cosmo Game
 
 ```bash
-# Option A: Serveur local simple
+# Option A: Simple local server
 cd game
 python3 -m http.server 8080
 # Ouvrir: http://localhost:8080
 
-# Option B: Directement dans le navigateur
+# Option B: Directly in browser
 # Ouvrir: file:///chemin/vers/FrostByte/game/index.html
 ```
 
-**Fonctionnalités à tester** :
-- ✅ Menu principal et navigation
-- ✅ Scan de planètes dans la carte galactique
-- ✅ Quiz multi-niveaux (Galactic Path)
-- ✅ Système solaire interactif
-- ✅ Progression XP et récompenses
+**Features to test** :
+- ✅ Main menu and navigation
+- ✅ Planet scanning in galactic map
+- ✅ Multi-level quiz (Galactic Path)
+- ✅ Interactive solar system
+- ✅ XP progression and rewards
 
-### 🤖 2. Tester le Chatbot IA
+### 🤖 2. Test AI Chatbot
 
-#### Interface Web
+#### Web Interface
 ```bash
-# Démarrer les backends
+# Start backends
 node server_test.js &
 source chatbot_env/bin/activate && python3 back.py &
 
-# Ouvrir l'interface de test
+# Open test interface
 # Navigateur: file:///chemin/vers/FrostByte/chatbot_test.html
 ```
 
-#### Version Terminal
+#### Terminal Version
 ```bash
 source chatbot_env/bin/activate
 python3 chatbot_terminal_test.py
-# Taper des questions en français ou anglais
+# Type questions in French or English
 ```
 
-#### Tests API Directs
+#### Direct API Tests
 ```bash
-# Test simple
+# Simple test
 curl -X POST http://localhost:5000/api/chat \
   -H "Content-Type: application/json" \
   -d '{"prompt": "Bonjour, qu'\''est-ce qu'\''une exoplanète ?"}'
 
-# Test avec données ML
+# Test with ML data
 curl -X POST http://localhost:5000/api/chat \
   -H "Content-Type: application/json" \
-  -d '{"prompt": "Analyse ces données", "features": [1.2, 0.8, 5.4, 2.1, 0.9, 1.5, 3.2, 0.7, 2.8, 1.1]}'
+  -d '{"prompt": "Analysis ces données", "features": [1.2, 0.8, 5.4, 2.1, 0.9, 1.5, 3.2, 0.7, 2.8, 1.1]}'
 ```
 
-### 📊 3. Tester le Dashboard ML
+### 📊 3. Test ML Dashboard
 
 ```bash
-# Démarrer Streamlit
+# Start Streamlit
 source chatbot_env/bin/activate
 streamlit run dashboard.py
 # Ouvrir: http://localhost:8501
 ```
 
-**Fonctionnalités à tester** :
-- ✅ Exemples prédéfinis (Kepler-1b, Hot Jupiter, etc.)
-- ✅ Saisie manuelle de paramètres
-- ✅ Génération de valeurs aléatoires
-- ✅ Visualisations interactives
-- ✅ Graphiques radar de profil
+**Features to test** :
+- ✅ Predefined examples (Kepler-1b, Hot Jupiter, etc.)
+- ✅ Manual parameter input
+- ✅ Random value generation
+- ✅ Interactive visualizations
+- ✅ Radar charts for profiles
 
-### 🔬 4. Tester l'API ML
+### 🔬 4. Test ML API
 
 ```bash
-# Test direct de l'API Flask
+# Direct Flask API test
 source chatbot_env/bin/activate
 python3 back.py &
 
@@ -301,44 +301,44 @@ curl -X POST http://localhost:5001/api/predict \
   -H "Content-Type: application/json" \
   -d '{"features": [1.2, 0.8, 5.4, 2.1, 0.9, 1.5, 3.2, 0.7, 2.8, 1.1]}'
 
-# Résultat attendu: {"prediction":0,"probabilities":[0.93,0.07]}
+# Expected result: {"prediction":0,"probabilities":[0.93,0.07]}
 ```
 
 ---
 
-## 🧪 Scripts de Test Automatisés
+## 🧪 Automated Test Scripts
 
-### Test Rapide Global
+### Quick Global Test
 ```bash
 chmod +x test_*.sh
 ./test_api.sh        # Test API ML
 ./test_chatbot.sh    # Test chatbot complet
 ```
 
-### Tests Manuels Détaillés
+### Detailed Manual Tests
 ```bash
-# Test des dépendances
+# Dependency test
 source chatbot_env/bin/activate
 python3 -c "
 from deep_translator import GoogleTranslator
 from langdetect import detect
 import flask, numpy, sklearn
-print('✅ Toutes les dépendances sont installées')
+print('✅ All dependencies are installed')
 "
 
-# Test du modèle ML
+# ML model test
 python3 -c "
 import joblib
 model = joblib.load('best_exoplanet_model.pkl')
-print('✅ Modèle ML chargé avec succès')
+print('✅ ML model loaded successfully')
 "
 ```
 
 ---
 
-## 🎯 Guides d'Utilisation Spécifiques
+## 🎯 Specific Usage Guides
 
-### 🎮 Guide du Jeu Cosmo
+### 🎮 Cosmo Game Guide
 
 1. **Démarrage** : Cliquez sur "Start Adventure"
 2. **Exploration** : Utilisez "Scan" pour découvrir des planètes
@@ -346,130 +346,130 @@ print('✅ Modèle ML chargé avec succès')
 4. **Système Solaire** : Explorez les planètes de notre système
 5. **Progression** : Gagnez XP et Stardust pour débloquer du contenu
 
-### 🤖 Guide du Chatbot
+### 🤖 Chatbot Guide
 
-1. **Questions Simples** :
-   - "Bonjour" → Salutation
-   - "Qu'est-ce qu'une exoplanète ?" → Information générale
-   - "Comment vérifier une exoplanète ?" → Guide technique
+1. **Simple Questions** :
+   - "Bonjour" → Greeting
+   - "Qu'est-ce qu'une exoplanète ?" → General information
+   - "Comment vérifier une exoplanète ?" → Technical guide
 
-2. **Analyse ML** :
-   - Remplir les 10 paramètres dans l'interface web
-   - Utiliser les boutons de test rapide
-   - Observer l'intégration des résultats ML
+2. **ML Analysis** :
+   - Fill in the 10 parameters in the web interface
+   - Use quick test buttons
+   - Observe ML results integration
 
-### 📊 Guide du Dashboard
+### 📊 Dashboard Guide
 
-1. **Mode Manuel** : Saisissez vos propres valeurs
-2. **Exemples** : Utilisez les cas prédéfinis
-3. **Aléatoire** : Générez des données de test
-4. **Analyse** : Observez les visualisations et métriques
+1. **Manual Mode** : Enter your own values
+2. **Examples** : Use predefined cases
+3. **Random** : Generate test data
+4. **Analysis** : Observe visualizations and metrics
 
 ---
 
-## 🔧 Dépannage
+## 🔧 Troubleshooting
 
-### Problèmes Courants
+### Common Issues
 
-#### ❌ Backend ML ne démarre pas
+#### ❌ ML Backend won't start
 ```bash
-# Solution 1: Régénérer le modèle
+# Solution 1: Regenerate model
 source chatbot_env/bin/activate
 python3 create_test_model.py
 python3 create_test_preprocessors.py
 
-# Solution 2: Vérifier les dépendances
+# Solution 2: Check dependencies
 pip install flask numpy scikit-learn
 ```
 
-#### ❌ Chatbot ne répond pas
+#### ❌ Chatbot not responding
 ```bash
-# Vérifier que les backends tournent
+# Check that backends are running
 curl http://localhost:5000/api/test
 curl http://localhost:5001/api/predict
 
-# Redémarrer les services
+# Restart services
 node server_test.js &
 python3 back.py &
 ```
 
-#### ❌ Dashboard Streamlit ne s'affiche pas
+#### ❌ Streamlit Dashboard not displaying
 ```bash
-# Installer Streamlit
+# Install Streamlit
 pip install streamlit plotly
 
-# Démarrer avec debug
+# Start with debug
 streamlit run dashboard.py --logger.level debug
 ```
 
-#### ❌ Jeu ne se charge pas
+#### ❌ Game won't load
 ```bash
 # Serveur local
 cd game
 python3 -m http.server 8080
 
-# Ou utiliser un serveur web (nginx, apache)
+# Or use a web server (nginx, apache)
 ```
 
-### Logs et Debug
+### Logs and Debug
 
 ```bash
-# Logs des backends
+# Backend logs
 tail -f nohup.out
 tail -f server.log
 
-# Debug Python
+# Python debug
 source chatbot_env/bin/activate
 python3 -c "import sys; print(sys.path)"
 
-# Debug Node.js
+# Node.js debug
 node --version
 npm list
 ```
 
 ---
 
-## 📈 Performance et Métriques
+## 📈 Performance and Metrics
 
-### Métriques du Système
+### System Metrics
 
-- **Modèle ML** : ~95% de précision sur dataset NASA
-- **Temps de réponse** : <200ms pour prédictions
-- **Chatbot** : Support français/anglais
-- **Jeu** : 10 niveaux, 100+ questions astronomie
+- **Modèle ML** : ~95% accuracy on NASA dataset
+- **Response time** : <200ms for predictions
+- **Chatbot** : French/English support
+- **Jeu** : 10 levels, 100+ astronomy questions
 
-### Optimisations
+### Optimizations
 
-- Modèles ML mis en cache
-- Réponses chatbot optimisées
-- Assets jeu compressés
-- APIs REST performantes
+- ML models cached
+- Optimized chatbot responses
+- Compressed game assets
+- High-performance REST APIs
 
 ---
 
-## 🚀 Déploiement Production
+## 🚀 Production Deployment
 
-### Configuration Production
+### Production Configuration
 
 ```bash
-# Variables d'environnement
+# Environment variables
 export GROQ_API_KEY="your_real_api_key"
 export NODE_ENV="production"
 export PYTHON_ENV="production"
 
-# Services avec PM2
+# Services with PM2
 npm install -g pm2
 pm2 start server.js --name "frostbyte-chat"
 pm2 start "python3 back.py" --name "frostbyte-ml"
 
-# Nginx (optionnel)
-# Configuration dans /etc/nginx/sites-available/frostbyte
+# Nginx (optional)
+# Configuration in /etc/nginx/sites-available/frostbyte
 ```
 
-### Docker (optionnel)
+### Docker (optional)
 
 ```dockerfile
-# Dockerfile exemple
+# Example Dockerfile
 FROM node:18-alpine
 WORKDIR /app
 COPY package*.json ./
@@ -483,85 +483,85 @@ CMD ["node", "server.js"]
 
 ## 🤝 Contribution
 
-### Comment Contribuer
+### How to Contribute
 
-1. Fork le projet
-2. Créer une branche (`git checkout -b feature/AmazingFeature`)
+1. Fork the project
+2. Create a branch (`git checkout -b feature/AmazingFeature`)
 3. Commit (`git commit -m 'Add AmazingFeature'`)
 4. Push (`git push origin feature/AmazingFeature`)
-5. Ouvrir une Pull Request
+5. Open a Pull Request
 
-### Standards de Code
+### Code Standards
 
 - **JavaScript** : ES6+, camelCase
 - **Python** : PEP 8, snake_case
 - **HTML/CSS** : BEM methodology
-- **Tests** : Obligatoires pour nouvelles fonctionnalités
+- **Tests** : Required for new features
 
 ---
 
 ## 🔮 Roadmap
 
-### Version 2.0 (Planifiée)
+### Version 2.0 (Planned)
 
-- [ ] 🌐 Interface React complète
-- [ ] 🗄️ Base de données persistante
-- [ ] 🔐 Système d'authentification
-- [ ] 📱 Application mobile
-- [ ] 🌍 Support multilingue étendu
-- [ ] 🎵 Bande sonore immersive
-- [ ] 🏆 Système de classements
+- [ ] 🌐 Complete React interface
+- [ ] 🗄️ Persistent database
+- [ ] 🔐 Authentication system
+- [ ] 📱 Mobile application
+- [ ] 🌍 Extended multilingual support
+- [ ] 🎵 Immersive soundtrack
+- [ ] 🏆 Ranking system
 
-### Fonctionnalités Avancées
+### Advanced Features
 
-- [ ] VR/AR pour exploration spatiale
-- [ ] IA conversationnelle avancée
-- [ ] Intégration APIs NASA temps réel
-- [ ] Multijoueur collaboratif
-- [ ] Génération procédurale d'univers
-
----
-
-## 📞 Support et Contact
-
-### Obtenir de l'Aide
-
-- 📚 **Documentation** : Consultez ce README et `RAPPORT_TEST.md`
-- 🐛 **Bugs** : Ouvrir une issue GitHub
-- 💡 **Suggestions** : Discussions GitHub
-- 📧 **Contact** : Voir profil GitHub
-
-### Communauté
-
-- 🌟 Star le projet si il vous plaît !
-- 🍴 Fork pour vos modifications
-- 📢 Partagez avec la communauté
+- [ ] VR/AR for space exploration
+- [ ] Advanced conversational AI
+- [ ] Real-time NASA API integration
+- [ ] Collaborative multiplayer
+- [ ] Procedural universe generation
 
 ---
 
-## 📄 Licence
+## 📞 Support and Contact
 
-Ce projet est sous licence MIT. Voir le fichier [LICENSE](LICENSE) pour plus de détails.
+### Getting Help
+
+- 📚 **Documentation** : Check this README and `RAPPORT_TEST.md`
+- 🐛 **Bugs** : Open a GitHub issue
+- 💡 **Suggestions** : GitHub Discussions
+- 📧 **Contact** : See GitHub profile
+
+### Community
+
+- 🌟 Star the project if you like it !
+- 🍴 Fork for your modifications
+- 📢 Share with the community
 
 ---
 
-## 🙏 Remerciements
+## 📄 License
 
-- **NASA** : Pour les données Kepler publiques
-- **Groq** : Pour l'API d'intelligence artificielle
-- **OpenSource Community** : Pour les nombreuses bibliothèques utilisées
-- **Streamlit** : Pour l'interface dashboard
-- **Font Awesome** : Pour les icônes
+This project is under MIT license. See the [LICENSE](LICENSE) file for more details.
+
+---
+
+## 🙏 Acknowledgments
+
+- **NASA** : For public Kepler data
+- **Groq** : For the artificial intelligence API
+- **OpenSource Community** : For the many libraries used
+- **Streamlit** : For the dashboard interface
+- **Font Awesome** : For the icons
 
 ---
 
 <div align="center">
 
-**🌌 FrostByte - Explorez l'Univers avec l'IA ! 🚀**
+**🌌 FrostByte - Explore the Universe with AI! 🚀**
 
 [![GitHub stars](https://img.shields.io/github/stars/Promis229/FrostByte?style=social)](https://github.com/Promis229/FrostByte)
 [![GitHub forks](https://img.shields.io/github/forks/Promis229/FrostByte?style=social)](https://github.com/Promis229/FrostByte)
 
-*Fait avec ❤️ pour l'éducation spatiale*
+*Made with ❤️ for space education*
 
 </div>
