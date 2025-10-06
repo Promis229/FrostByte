@@ -1,0 +1,4 @@
+# Netlify redirects for FrostByte
+/chatbot    /chatbot_test.html    200
+/game/*     /game/:splat          200
+/*          /index.html           200

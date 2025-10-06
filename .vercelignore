@@ -1,34 +1,50 @@
-# Python virtual environment
+# Python files (pour déploiement séparé)
+back.py
+dashboard.py
+*.pkl
+*.joblib
+*.csv
 chatbot_env/
 .venv/
 __pycache__/
 *.pyc
 *.pyo
+model.ipynb
+one_eda.ipynb
 
-# ML Models (too large for Vercel)
-*.pkl
-*.joblib
+# Scripts de test et utilitaires
+test_*.sh
+test_*.py
+chatbot_terminal.py
+chatbot_terminal_test.py
+create_test_*.py
 
-# Data files
-datas.csv
-datas_cleaned.csv
+# Fichiers de déploiement
+deploy.sh
+prepare_deploy.sh
+start_frostbyte.sh
+stop_frostbyte.sh
+frostbyte-deploy.zip
+frostbyte-deploy/
 
 # Logs
 *.log
+nohup.out
 logs/
+
+# Docker (non utilisé sur Vercel)
+Dockerfile
+docker-compose.yml
+docker-entrypoint.sh
+nginx.conf
+
+# Documentation locale
+RAPPORT_TEST.md
 
 # Development files
 .pytest_cache/
 .coverage
 .env.local
-
-# Docker files
-Dockerfile
-docker-compose.yml
-docker-entrypoint.sh
-
-# Large dependencies
-node_modules/
 
 # Build files
 dist/

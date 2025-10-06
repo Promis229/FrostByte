@@ -23,6 +23,10 @@
       "dest": "/chatbot_test.html"
     },
     {
+      "src": "/dashboard",
+      "dest": "https://frostbyte-dashboard.vercel.app"
+    },
+    {
       "src": "/",
       "dest": "/index.html"
     }
@@ -31,5 +35,8 @@
     "server_test.js": {
       "maxDuration": 30
     }
+  },
+  "env": {
+    "GROQ_API_KEY": "@groq_api_key"
   }
 }

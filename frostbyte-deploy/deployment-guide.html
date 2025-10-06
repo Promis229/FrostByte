@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🚀 Déploiement FrostByte - Guide Alternative</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #0f0f0f;
+            color: #fff;
+        }
+        .option {
+            background: rgba(0, 212, 255, 0.1);
+            border: 1px solid #00d4ff;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .button {
+            background: #00d4ff;
+            color: #000;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            display: inline-block;
+            margin: 10px 5px;
+        }
+        .step {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🌌 FrostByte - Options de Déploiement</h1>
+    
+    <div class="option">
+        <h2>🔧 Option 1: GitHub Pages (Repository Public)</h2>
+        <div class="step">
+            <strong>Étape 1:</strong> Rendez votre repository public<br>
+            → GitHub.com → FrostByte → Settings → Danger Zone → Change visibility → Public
+        </div>
+        <div class="step">
+            <strong>Étape 2:</strong> Activez GitHub Pages<br>
+            → Settings → Pages → Source: GitHub Actions → Save
+        </div>
+        <a href="https://github.com/Promis229/FrostByte/settings" class="button">🔗 GitHub Settings</a>
+    </div>
+
+    <div class="option">
+        <h2>🚀 Option 2: Netlify (Recommandé)</h2>
+        <div class="step">
+            <strong>Étape 1:</strong> Connectez-vous à Netlify<br>
+            → Créez un compte avec GitHub
+        </div>
+        <div class="step">
+            <strong>Étape 2:</strong> Déployez votre site<br>
+            → New site from Git → GitHub → FrostByte → Deploy
+        </div>
+        <a href="https://app.netlify.com/start" class="button">🚀 Déployer sur Netlify</a>
+    </div>
+
+    <div class="option">
+        <h2>⚡ Option 3: Vercel</h2>
+        <div class="step">
+            <strong>Import depuis GitHub:</strong><br>
+            → Connectez GitHub → Import FrostByte → Deploy
+        </div>
+        <a href="https://vercel.com/import" class="button">⚡ Déployer sur Vercel</a>
+    </div>
+
+    <div class="option">
+        <h2>📱 Résultat Final</h2>
+        <p>Votre site FrostByte sera accessible via une URL publique :</p>
+        <ul>
+            <li>🏠 Page d'accueil interactive</li>
+            <li>🎮 Jeu Cosmo d'exploration spatiale</li>
+            <li>🤖 Chatbot IA multilingue</li>
+            <li>📊 Dashboard ML (lien local)</li>
+        </ul>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Effet d'animation pour les boutons
+            const buttons = document.querySelectorAll('.button');
+            buttons.forEach(button => {
+                button.addEventListener('mouseenter', function() {
+                    this.style.transform = 'scale(1.05)';
+                    this.style.transition = 'transform 0.2s';
+                });
+                button.addEventListener('mouseleave', function() {
+                    this.style.transform = 'scale(1)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
