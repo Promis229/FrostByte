@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🌌 FrostByte - Écosystème d'Exploration Spatiale</title>
+    <title>🌌 FrostByte - Space Exploration Ecosystem</title>
     <style>
         * {
             margin: 0;
@@ -155,11 +155,6 @@
             color: #4caf50;
         }
         
-        .status-demo {
-            background: rgba(255, 193, 7, 0.3);
-            color: #ffc107;
-        }
-        
         .footer {
             margin-top: 50px;
             text-align: center;
@@ -198,8 +193,8 @@
     <div class="container">
         <div class="header">
             <h1>🌌 FrostByte</h1>
-            <p>Écosystème d'Exploration Spatiale Interactif</p>
-            <p class="subtitle">Intelligence Artificielle • Machine Learning • Gaming Éducatif</p>
+            <p>Interactive Space Exploration Ecosystem</p>
+            <p class="subtitle">Artificial Intelligence • Machine Learning • Educational Gaming</p>
             
             <div class="tech-stack">
                 <span class="tech-item">🎮 HTML5 Games</span>
@@ -213,49 +208,50 @@
         <div class="components-grid">
             <div class="component-card" onclick="window.open('./game/', '_blank')">
                 <span class="component-icon">🎮</span>
-                <h3 class="component-title">Jeu Cosmo</h3>
+                <h3 class="component-title">Cosmo Game</h3>
                 <div class="component-status status-live">🟢 LIVE</div>
                 <p class="component-description">
-                    Explorez l'univers avec Cosmo ! Découvrez les exoplanètes, répondez aux quiz d'astronomie et progressez à travers 10 niveaux galactiques.
+                    Explore the universe with Cosmo! Discover exoplanets, answer astronomy quizzes and progress through 10 galactic levels.
                 </p>
             </div>
             
             <div class="component-card" onclick="window.open('./chatbot_test.html', '_blank')">
                 <span class="component-icon">🤖</span>
-                <h3 class="component-title">Chatbot IA</h3>
+                <h3 class="component-title">AI Chatbot</h3>
                 <div class="component-status status-live">🟢 LIVE</div>
                 <p class="component-description">
-                    Assistant intelligent multilingue spécialisé en exoplanètes. Posez vos questions sur l'astronomie et l'exploration spatiale !
+                    Intelligent multilingual assistant specialized in exoplanets. Ask your questions about astronomy and space exploration!
                 </p>
             </div>
             
-            <div class="component-card" onclick="alert('🚧 Dashboard ML en cours de déploiement!\n\n📊 Le dashboard Streamlit sera bientôt disponible.\n🔗 Actuellement accessible uniquement en local.\n\n💡 Utilisez le Chatbot IA pour tester les fonctionnalités ML !')">
-                <div class="component-icon">📊</div>
-                <h3 class="component-title">Dashboard ML</h3>
-                <div class="component-status status-soon">🟡 BIENTÔT</div>
-                <p class="component-desc">Predict exoplanets with Machine Learning models and interactive visualizations</p>
-                <span class="launch-btn">Launch Dashboard 🚀</span>
+            <div class="component-card" onclick="alert('🚧 ML Dashboard coming soon!\\n\\n📊 Advanced analytics will be available in the next version.\\n\\n💡 Try the AI Chatbot for exoplanet questions!')">
+                <span class="component-icon">📊</span>
+                <h3 class="component-title">ML Dashboard</h3>
+                <div class="component-status status-demo">� COMING SOON</div>
+                <p class="component-description">
+                    Interactive dashboard with Machine Learning to predict exoplanets. Real-time visualizations and pre-trained models.
+                </p>
             </div>
             
             <div class="component-card" onclick="window.open('https://github.com/Promis229/FrostByte', '_blank')">
                 <span class="component-icon">💻</span>
-                <h3 class="component-title">Code Source</h3>
+                <h3 class="component-title">Source Code</h3>
                 <div class="component-status status-live">🟢 GITHUB</div>
                 <p class="component-description">
-                    Accédez au code source complet, à la documentation et aux guides de déploiement sur GitHub.
+                    Access the complete source code, documentation and deployment guides on GitHub.
                 </p>
             </div>
         </div>
         
         <div class="footer">
-            <p>🌟 Développé avec passion pour l'exploration spatiale</p>
+            <p>🌟 Developed with passion for space exploration</p>
             <p>📡 Technologies: React, Node.js, Python, scikit-learn, Streamlit</p>
-            <p>🚀 © 2025 FrostByte - Explorez l'univers avec l'IA</p>
+            <p>🚀 © 2025 FrostByte - Explore the universe with AI</p>
         </div>
     </div>
     
     <script>
-        // Créer le champ d'étoiles
+        // Create starfield
         function createStarfield() {
             const starfield = document.getElementById('starfield');
             const numStars = 200;
@@ -274,7 +270,7 @@
         
         createStarfield();
         
-        // Effet de parallaxe sur les étoiles
+        // Parallax effect on stars
         document.addEventListener('mousemove', (e) => {
             const stars = document.querySelectorAll('.star');
             const x = e.clientX / window.innerWidth;
