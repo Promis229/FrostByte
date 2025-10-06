@@ -24,7 +24,7 @@ deploy.sh
 prepare_deploy.sh
 start_frostbyte.sh
 stop_frostbyte.sh
-frostbyte-deploy.zip
+*.zip
 frostbyte-deploy/
 
 # Logs
@@ -53,3 +53,6 @@ build/
 # OS files
 .DS_Store
 Thumbs.db
+
+# Large files
+jeu/

@@ -394,6 +394,20 @@ backup_models/
 temp_data/
 cache_data/
 
+# GROS FICHIERS ML (déploiement séparé)
+*.pkl
+*.csv
+best_exoplanet_model.pkl
+exoplanet_*.pkl
+datas.csv
+datas_cleaned.csv
+
+# Archives de déploiement
+frostbyte-deploy.zip
+*.zip
+frostbyte-deploy/
+jeu/
+
 # Rapports temporaires (garder les principaux)
 RAPPORT_TEST_*.md
 DEBUG_*.md
