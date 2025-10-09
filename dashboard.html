@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌌 FrostByte Exoplanet Predictor</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+            color: #e2e8f0;
+            min-height: 100vh;
+        }
+        
+        .app-container {
+            display: flex;
+            min-height: 100vh;
+        }
+        
+        .sidebar {
+            width: 320px;
+            background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
+            border-right: 1px solid rgba(59, 130, 246, 0.3);
+            box-shadow: 2px 0 20px rgba(59, 130, 246, 0.1);
+            padding: 20px;
+            overflow-y: auto;
+            position: fixed;
+            height: 100vh;
+        }
+        
+        .main-content {
+            margin-left: 320px;
+            padding: 20px;
+            flex: 1;
+            overflow-y: auto;
+        }
+        
+        h1 {
+            color: #60a5fa;
+            text-align: center;
+            padding: 20px;
+            text-shadow: 0 0 20px rgba(96, 165, 250, 0.5);
+            font-size: 3rem !important;
+            margin-bottom: 30px !important;
+        }
+        
+        h2, h3 {
+            color: #60a5fa;
+            text-shadow: 0 0 10px rgba(96, 165, 250, 0.3);
+            margin-bottom: 15px;
+        }
+        
+        .sidebar h3 {
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(59, 130, 246, 0.3);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #94a3b8;
+            font-weight: 500;
+            font-size: 14px;
+        }
+        
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid rgba(59, 130, 246, 0.4);
+            border-radius: 8px;
+            background: rgba(30, 41, 59, 0.8);
+            color: #e2e8f0;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 10px rgba(59, 130, 246, 0.4);
+        }
+        
+        .radio-group {
+            background: rgba(30, 41, 59, 0.4);
+            border-radius: 10px;
+            padding: 15px;
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            margin-bottom: 20px;
+        }
+        
+        .radio-group label {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            cursor: pointer;
+            color: #e2e8f0;
+        }
+        
+        .radio-group input[type="radio"] {
+            margin-right: 10px;
+            width: auto;
+        }
+        
+        .predict-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
+            margin-top: 20px;
+        }
+        
+        .predict-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.6);
+        }
+        
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .content-section {
+            background: rgba(30, 41, 59, 0.8);
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.1);
+        }
+        
+        .input-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .input-table th,
+        .input-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid rgba(59, 130, 246, 0.2);
+        }
+        
+        .input-table th {
+            color: #60a5fa;
+            font-weight: 600;
+        }
+        
+        .prediction-confirmed {
+            background: linear-gradient(135deg, #059669, #047857);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 0 40px rgba(5, 150, 105, 0.4);
+            animation: pulse-green 2s infinite;
+        }
+        
+        .prediction-candidate {
+            background: linear-gradient(135deg, #d97706, #b45309);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 0 40px rgba(217, 119, 6, 0.4);
+            animation: pulse-orange 2s infinite;
+        }
+        
+        .prediction-false {
+            background: linear-gradient(135deg, #dc2626, #b91c1c);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 0 40px rgba(220, 38, 38, 0.4);
+            animation: pulse-red 2s infinite;
+        }
+        
+        @keyframes pulse-green {
+            0%, 100% { box-shadow: 0 0 40px rgba(5, 150, 105, 0.4); }
+            50% { box-shadow: 0 0 60px rgba(5, 150, 105, 0.7); }
+        }
+        
+        @keyframes pulse-orange {
+            0%, 100% { box-shadow: 0 0 40px rgba(217, 119, 6, 0.4); }
+            50% { box-shadow: 0 0 60px rgba(217, 119, 6, 0.7); }
+        }
+        
+        @keyframes pulse-red {
+            0%, 100% { box-shadow: 0 0 40px rgba(220, 38, 38, 0.4); }
+            50% { box-shadow: 0 0 60px rgba(220, 38, 38, 0.7); }
+        }
+        
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .metric-card {
+            background: rgba(30, 41, 59, 0.6);
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid rgba(96, 165, 250, 0.2);
+            box-shadow: 0 0 15px rgba(96, 165, 250, 0.1);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .metric-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 25px rgba(96, 165, 250, 0.3);
+        }
+        
+        .metric-card h4 {
+            color: #60a5fa;
+            text-shadow: 0 0 10px rgba(96, 165, 250, 0.5);
+            margin-bottom: 10px;
+        }
+        
+        .metric-card h3 {
+            margin: 10px 0;
+            font-size: 1.5em;
+        }
+        
+        .chart-container {
+            background: rgba(30, 41, 59, 0.8);
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.1);
+            margin: 20px 0;
+        }
+        
+        .info-card {
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 15px 0;
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.1);
+        }
+        
+        .footer {
+            background: rgba(15, 23, 42, 0.8);
+            border-top: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 40px;
+            text-align: center;
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.1);
+        }
+        
+        .glow-text {
+            color: #60a5fa;
+            text-shadow: 0 0 10px rgba(96, 165, 250, 0.5);
+        }
+        
+        .separator {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(96, 165, 250, 0.5), transparent);
+            margin: 30px 0;
+        }
+        
+        .section-title {
+            color: #60a5fa;
+            text-shadow: 0 0 10px rgba(96, 165, 250, 0.3);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+        
+        .random-btn {
+            width: 100%;
+            padding: 10px;
+            background: rgba(217, 119, 6, 0.3);
+            color: #f59e0b;
+            border: 1px solid rgba(217, 119, 6, 0.4);
+            border-radius: 8px;
+            cursor: pointer;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+        
+        .random-btn:hover {
+            background: rgba(217, 119, 6, 0.4);
+        }
+        
+        @media (max-width: 1024px) {
+            .sidebar {
+                position: static;
+                width: 100%;
+                height: auto;
+            }
+            
+            .main-content {
+                margin-left: 0;
+            }
+            
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .metrics-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <div class="sidebar">
+            <h3>🎛️ Celestial Object Parameters</h3>
+            
+            <div class="form-group">
+                <label>Input Mode</label>
+                <div class="radio-group">
+                    <label>
+                        <input type="radio" name="inputMode" value="manual" checked>
+                        Manual Entry
+                    </label>
+                    <label>
+                        <input type="radio" name="inputMode" value="examples">
+                        Predefined Examples
+                    </label>
+                    <label>
+                        <input type="radio" name="inputMode" value="random">
+                        Random Values
+                    </label>
+                </div>
+            </div>
+            
+            <div id="exampleSelector" style="display: none;">
+                <div class="form-group">
+                    <label for="exampleChoice">Choose Example</label>
+                    <select id="exampleChoice">
+                        <option value="kepler">Kepler-1b (Confirmed)</option>
+                        <option value="jupiter">Hot Jupiter (Confirmed)</option>
+                        <option value="earth">Super-Earth (Candidate)</option>
+                        <option value="false">False Positive</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div id="randomGenerator" style="display: none;">
+                <button class="random-btn" onclick="generateRandomValues()">🎲 Generate Random Values</button>
+            </div>
+            
+            <div class="separator"></div>
+            
+            <h4 class="glow-text">📊 Transit Parameters</h4>
+            
+            <div class="form-group">
+                <label for="koi_score">Confidence Score (koi_score)</label>
+                <input type="range" id="koi_score" min="0" max="1" step="0.01" value="0.8">
+                <small style="color: #94a3b8;">Kepler algorithm confidence score (0-1)</small>
+            </div>
+            
+            <div class="form-group">
+                <label for="koi_model_snr">Signal-to-Noise Ratio (koi_model_snr)</label>
+                <input type="number" id="koi_model_snr" min="0" max="10000" step="10" value="100">
+                <small style="color: #94a3b8;">Quality of detected transit signal</small>
+            </div>
+            
+            <h4 class="glow-text">🪐 Orbital Parameters</h4>
+            
+            <div class="form-group">
+                <label for="koi_period">Orbital Period [days] (koi_period)</label>
+                <input type="number" id="koi_period" min="0.1" max="1000" step="0.1" value="10.0">
+                <small style="color: #94a3b8;">Time for one complete orbit around the star</small>
+            </div>
+            
+            <div class="form-group">
+                <label for="koi_duration">Transit Duration [hours] (koi_duration)</label>
+                <input type="number" id="koi_duration" min="0.1" max="24" step="0.1" value="3.0">
+                <small style="color: #94a3b8;">Duration planet passes in front of star</small>
+            </div>
+            
+            <div class="form-group">
+                <label for="koi_depth">Transit Depth [ppm] (koi_depth)</label>
+                <input type="number" id="koi_depth" min="1" max="50000" step="10" value="1000">
+                <small style="color: #94a3b8;">Brightness decrease in parts per million</small>
+            </div>
+            
+            <h4 class="glow-text">🌍 Planetary Properties</h4>
+            
+            <div class="form-group">
+                <label for="koi_prad">Planetary Radius [R⊕] (koi_prad)</label>
+                <input type="number" id="koi_prad" min="0.1" max="50" step="0.1" value="2.5">
+                <small style="color: #94a3b8;">Size relative to Earth (1 = Earth, 11.2 = Jupiter)</small>
+            </div>
+            
+            <div class="form-group">
+                <label for="koi_teq">Equilibrium Temperature [K] (koi_teq)</label>
+                <input type="number" id="koi_teq" min="0" max="3000" step="10" value="500">
+                <small style="color: #94a3b8;">Theoretical planet temperature</small>
+            </div>
+            
+            <h4 class="glow-text">🚩 False Positive Flags</h4>
+            
+            <div class="form-group">
+                <label for="koi_fpflag_nt">Not Transit-like (koi_fpflag_nt)</label>
+                <select id="koi_fpflag_nt">
+                    <option value="0">0 - Normal transit</option>
+                    <option value="1">1 - Not transit-like</option>
+                </select>
+                <small style="color: #94a3b8;">1 = Signal doesn't resemble a transit</small>
+            </div>
+            
+            <div class="form-group">
+                <label for="koi_fpflag_ss">Stellar Eclipse (koi_fpflag_ss)</label>
+                <select id="koi_fpflag_ss">
+                    <option value="0">0 - No stellar eclipse</option>
+                    <option value="1">1 - Stellar eclipse detected</option>
+                </select>
+                <small style="color: #94a3b8;">1 = Signal probably caused by binary eclipse</small>
+            </div>
+            
+            <button class="predict-btn" onclick="makePrediction()">🚀 LAUNCH PREDICTION</button>
+        </div>
+        
+        <div class="main-content">
+            <h1>🌌 FrostByte Exoplanet Predictor</h1>
+            <h3 style="text-align: center; margin-bottom: 40px;">Advanced AI-powered exoplanet detection and classification system</h3>
+            
+            <div class="content-grid">
+                <div class="content-section">
+                    <h3 class="section-title">📋 Input Values</h3>
+                    <table class="input-table" id="inputTable">
+                        <thead>
+                            <tr>
+                                <th>Parameter</th>
+                                <th>Value</th>
+                                <th>Unit</th>
+                            </tr>
+                        </thead>
+                        <tbody id="inputTableBody">
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="content-section">
+                    <h3 class="section-title">🎯 Prediction Result</h3>
+                    <div id="predictionResult">
+                        <div class="info-card">
+                            <h3>🔬 Ready for Analysis</h3>
+                            <p>👈 Click 'LAUNCH PREDICTION' in the sidebar to analyze this celestial object</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="separator"></div>
+            
+            <div id="probabilityChart" style="display: none;">
+                <div class="chart-container">
+                    <div id="probChart"></div>
+                </div>
+            </div>
+            
+            <div class="separator"></div>
+            
+            <h3 class="section-title">📊 Object Analysis</h3>
+            
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <h4 class="glow-text">Estimated Planet Type</h4>
+                    <h3 id="planetType">Unknown</h3>
+                    <p id="planetSize">- R⊕</p>
+                </div>
+                <div class="metric-card">
+                    <h4 class="glow-text">Orbital Zone</h4>
+                    <h3 id="habitableZone">Unknown</h3>
+                    <p id="temperature">- K</p>
+                </div>
+                <div class="metric-card">
+                    <h4 class="glow-text">Orbit Type</h4>
+                    <h3 id="orbitType">Unknown</h3>
+                    <p id="period">- days</p>
+                </div>
+            </div>
+            
+            <h3 class="section-title">📈 Object Profile</h3>
+            
+            <div class="chart-container">
+                <div id="radarChart"></div>
+            </div>
+            
+            <div class="footer">
+                <h3 class="glow-text">🔭 FrostByte Exoplanet Predictor</h3>
+                <p>Powered by NASA Exoplanet Archive | Advanced ML Model: Random Forest</p>
+                <p>Model Accuracy: ~95% | Created with ❤️ for space exploration</p>
+            </div>
+        </div>
+    </div>
+    
+    <script src="api.js"></script>
+    <script>
+        const examples = {
+            kepler: {
+                koi_score: 0.811, koi_period: 2.47, koi_duration: 1.74,
+                koi_depth: 14231, koi_model_snr: 4304.3, koi_prad: 13.04,
+                koi_teq: 1339, koi_fpflag_nt: 0, koi_fpflag_ss: 0
+            },
+            jupiter: {
+                koi_score: 0.998, koi_period: 3.52, koi_duration: 3.20,
+                koi_depth: 9145, koi_model_snr: 1741.5, koi_prad: 14.59,
+                koi_teq: 1521, koi_fpflag_nt: 0, koi_fpflag_ss: 0
+            },
+            earth: {
+                koi_score: 0.0, koi_period: 19.90, koi_duration: 1.78,
+                koi_depth: 10829, koi_model_snr: 76.3, koi_prad: 14.60,
+                koi_teq: 638, koi_fpflag_nt: 0, koi_fpflag_ss: 0
+            },
+            false: {
+                koi_score: 0.0, koi_period: 1.74, koi_duration: 2.41,
+                koi_depth: 8079, koi_model_snr: 505.6, koi_prad: 33.46,
+                koi_teq: 1395, koi_fpflag_nt: 0, koi_fpflag_ss: 1
+            }
+        };
+        
+        // Event listeners for input mode
+        document.querySelectorAll('input[name="inputMode"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                const exampleSelector = document.getElementById('exampleSelector');
+                const randomGenerator = document.getElementById('randomGenerator');
+                
+                if (this.value === 'examples') {
+                    exampleSelector.style.display = 'block';
+                    randomGenerator.style.display = 'none';
+                    loadExample();
+                } else if (this.value === 'random') {
+                    exampleSelector.style.display = 'none';
+                    randomGenerator.style.display = 'block';
+                } else {
+                    exampleSelector.style.display = 'none';
+                    randomGenerator.style.display = 'none';
+                }
+                
+                updateDisplays();
+            });
+        });
+        
+        // Event listener for example selector
+        document.getElementById('exampleChoice').addEventListener('change', loadExample);
+        
+        function loadExample() {
+            const exampleChoice = document.getElementById('exampleChoice').value;
+            const exampleData = examples[exampleChoice];
+            
+            Object.keys(exampleData).forEach(key => {
+                const element = document.getElementById(key);
+                if (element) {
+                    element.value = exampleData[key];
+                }
+            });
+            
+            updateDisplays();
+        }
+        
+        function generateRandomValues() {
+            const randomData = {
+                koi_score: Math.random(),
+                koi_period: Math.random() * 100 + 0.5,
+                koi_duration: Math.random() * 15 + 0.5,
+                koi_depth: Math.random() * 20000 + 10,
+                koi_model_snr: Math.random() * 5000 + 5,
+                koi_prad: Math.random() * 30 + 0.5,
+                koi_teq: Math.random() * 2300 + 200,
+                koi_fpflag_nt: Math.random() > 0.5 ? 1 : 0,
+                koi_fpflag_ss: Math.random() > 0.5 ? 1 : 0
+            };
+            
+            Object.keys(randomData).forEach(key => {
+                const element = document.getElementById(key);
+                if (element) {
+                    element.value = randomData[key];
+                }
+            });
+            
+            updateDisplays();
+        }
+        
+        function getFormData() {
+            return {
+                koi_score: parseFloat(document.getElementById('koi_score').value),
+                koi_period: parseFloat(document.getElementById('koi_period').value),
+                koi_duration: parseFloat(document.getElementById('koi_duration').value),
+                koi_depth: parseFloat(document.getElementById('koi_depth').value),
+                koi_model_snr: parseFloat(document.getElementById('koi_model_snr').value),
+                koi_prad: parseFloat(document.getElementById('koi_prad').value),
+                koi_teq: parseFloat(document.getElementById('koi_teq').value),
+                koi_fpflag_nt: parseInt(document.getElementById('koi_fpflag_nt').value),
+                koi_fpflag_ss: parseInt(document.getElementById('koi_fpflag_ss').value)
+            };
+        }
+        
+        function updateInputTable() {
+            const data = getFormData();
+            const tableBody = document.getElementById('inputTableBody');
+            
+            const rows = [
+                ['Confidence Score', data.koi_score.toFixed(3), '-'],
+                ['Orbital Period', data.koi_period.toFixed(2), 'days'],
+                ['Transit Duration', data.koi_duration.toFixed(2), 'hours'],
+                ['Transit Depth', data.koi_depth.toFixed(1), 'ppm'],
+                ['Signal-to-Noise', data.koi_model_snr.toFixed(1), '-'],
+                ['Planetary Radius', data.koi_prad.toFixed(2), 'R⊕'],
+                ['Temperature', data.koi_teq.toFixed(0), 'K'],
+                ['Flag Not Transit-like', data.koi_fpflag_nt.toString(), '-'],
+                ['Flag Stellar Eclipse', data.koi_fpflag_ss.toString(), '-']
+            ];
+            
+            tableBody.innerHTML = rows.map(row => 
+                `<tr><td>${row[0]}</td><td>${row[1]}</td><td>${row[2]}</td></tr>`
+            ).join('');
+        }
+        
+        function updateMetrics() {
+            const data = getFormData();
+            
+            // Planet type
+            let planetType = "Earth-sized";
+            if (data.koi_prad > 8) planetType = "Jupiter-like";
+            else if (data.koi_prad > 1.5) planetType = "Super-Earth";
+            document.getElementById('planetType').textContent = planetType;
+            document.getElementById('planetSize').textContent = data.koi_prad.toFixed(1) + ' R⊕';
+            
+            // Habitable zone
+            let zone = "Too Cold";
+            if (data.koi_teq > 350) zone = "Too Hot";
+            else if (data.koi_teq >= 200) zone = "Habitable Zone";
+            document.getElementById('habitableZone').textContent = zone;
+            document.getElementById('temperature').textContent = data.koi_teq.toFixed(0) + ' K';
+            
+            // Orbit type
+            let orbitType = "Distant";
+            if (data.koi_period < 10) orbitType = "Very Close";
+            else if (data.koi_period < 100) orbitType = "Close";
+            document.getElementById('orbitType').textContent = orbitType;
+            document.getElementById('period').textContent = data.koi_period.toFixed(1) + ' days';
+        }
+        
+        function updateRadarChart() {
+            const data = getFormData();
+            
+            const radarValues = [
+                Math.min(data.koi_score * 100, 100),
+                Math.min((data.koi_model_snr / 100) * 100, 100),
+                Math.min((data.koi_prad / 20) * 100, 100),
+                Math.min((data.koi_depth / 10000) * 100, 100),
+                data.koi_fpflag_nt === 0 && data.koi_fpflag_ss === 0 ? 100 : 0
+            ];
+            
+            const trace = {
+                type: 'scatterpolar',
+                r: radarValues,
+                theta: ['Confidence<br>Score', 'SNR', 'Radius', 'Transit<br>Depth', 'Signal<br>Quality'],
+                fill: 'toself',
+                line: { color: '#60a5fa', width: 3 },
+                fillcolor: 'rgba(96, 165, 250, 0.3)'
+            };
+            
+            const layout = {
+                polar: {
+                    radialaxis: {
+                        visible: true,
+                        range: [0, 100],
+                        tickfont: { color: '#e2e8f0' },
+                        gridcolor: 'rgba(96, 165, 250, 0.2)'
+                    },
+                    angularaxis: {
+                        tickfont: { color: '#e2e8f0' },
+                        gridcolor: 'rgba(96, 165, 250, 0.2)'
+                    },
+                    bgcolor: 'rgba(0,0,0,0.1)'
+                },
+                showlegend: false,
+                plot_bgcolor: 'rgba(0,0,0,0)',
+                paper_bgcolor: 'rgba(0,0,0,0)',
+                font: { color: '#e2e8f0' },
+                height: 500,
+                margin: { t: 10, b: 10, l: 10, r: 10 }
+            };
+            
+            Plotly.newPlot('radarChart', [trace], layout, {responsive: true});
+        }
+        
+        function updateDisplays() {
+            updateInputTable();
+            updateMetrics();
+            updateRadarChart();
+        }
+        
+        async function makePrediction() {
+            const data = getFormData();
+            const features = [
+                data.koi_score, data.koi_period, data.koi_duration,
+                data.koi_depth, data.koi_model_snr, data.koi_prad,
+                data.koi_teq, data.koi_fpflag_nt, data.koi_fpflag_ss
+            ];
+            
+            try {
+                const result = await predictExoplanet(features);
+                displayPrediction(result);
+                updateProbabilityChart(result);
+                
+            } catch (error) {
+                console.error('Prediction error:', error);
+                displayError('Error making prediction. Please check your inputs.');
+            }
+        }
+        
+        function displayPrediction(result) {
+            const predictionDiv = document.getElementById('predictionResult');
+            
+            const cssClasses = {
+                'CONFIRMED': 'prediction-confirmed',
+                'CANDIDATE': 'prediction-candidate',
+                'FALSE POSITIVE': 'prediction-false'
+            };
+            
+            const icons = {
+                'CONFIRMED': '✅',
+                'CANDIDATE': '⚠️',
+                'FALSE POSITIVE': '❌'
+            };
+            
+            predictionDiv.innerHTML = `
+                <div class='${cssClasses[result.prediction_label] || 'prediction-box'}'>
+                    <h1 style='font-size: 4em; margin: 0;'>${icons[result.prediction_label] || '🔍'}</h1>
+                    <h2 style='margin: 10px 0 0 0; font-size: 2em;'>${result.prediction_label}</h2>
+                </div>
+            `;
+        }
+        
+        function updateProbabilityChart(result) {
+            const trace = {
+                x: result.classes || ['CONFIRMED', 'CANDIDATE', 'FALSE POSITIVE'],
+                y: result.probabilities || [0.33, 0.33, 0.34],
+                type: 'bar',
+                marker: {
+                    color: ['#059669', '#d97706', '#dc2626']
+                },
+                text: (result.probabilities || [0.33, 0.33, 0.34]).map(p => (p * 100).toFixed(1) + '%'),
+                textposition: 'outside'
+            };
+            
+            const layout = {
+                title: {
+                    text: '<span style="color:#60a5fa">Probabilities by Class</span>',
+                    font: { size: 20 }
+                },
+                plot_bgcolor: 'rgba(0,0,0,0)',
+                paper_bgcolor: 'rgba(0,0,0,0)',
+                font: { color: '#e2e8f0' },
+                xaxis: { color: '#e2e8f0' },
+                yaxis: { 
+                    color: '#e2e8f0',
+                    tickformat: '.0%',
+                    title: 'Probability'
+                },
+                showlegend: false,
+                margin: { t: 50, b: 50, l: 60, r: 20 }
+            };
+            
+            Plotly.newPlot('probChart', [trace], layout, {responsive: true});
+            document.getElementById('probabilityChart').style.display = 'block';
+        }
+        
+        function displayError(message) {
+            const predictionDiv = document.getElementById('predictionResult');
+            predictionDiv.innerHTML = `
+                <div class='prediction-false'>
+                    <h1 style='font-size: 4em; margin: 0;'>⚠️</h1>
+                    <h2 style='margin: 10px 0 0 0; font-size: 2em;'>Error</h2>
+                    <p>${message}</p>
+                </div>
+            `;
+        }
+        
+        // Event listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            updateDisplays();
+            
+            // Update displays when inputs change
+            const inputs = document.querySelectorAll('input, select');
+            inputs.forEach(input => {
+                input.addEventListener('change', updateDisplays);
+                input.addEventListener('input', updateDisplays);
+            });
+        });
+    </script>
+</body>
+</html>

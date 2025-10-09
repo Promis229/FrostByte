@@ -88,6 +88,7 @@
             gap: 30px;
             width: 100%;
             max-width: 1000px;
+            justify-items: center;
         }
         
         .component-card {
@@ -101,6 +102,8 @@
             cursor: pointer;
             position: relative;
             overflow: hidden;
+            width: 100%;
+            max-width: 350px;
         }
         
         .component-card:before {
@@ -224,21 +227,12 @@
                 </p>
             </div>
             
-            <div class="component-card" onclick="alert('🚧 ML Dashboard coming soon!\\n\\n📊 Advanced analytics will be available in the next version.\\n\\n💡 Try the AI Chatbot for exoplanet questions!')">
+            <div class="component-card" onclick="openDashboard()">
                 <span class="component-icon">📊</span>
                 <h3 class="component-title">ML Dashboard</h3>
-                <div class="component-status status-demo">� COMING SOON</div>
+                <div class="component-status status-live">🟢 LIVE</div>
                 <p class="component-description">
-                    Interactive dashboard with Machine Learning to predict exoplanets. Real-time visualizations and pre-trained models.
-                </p>
-            </div>
-            
-            <div class="component-card" onclick="window.open('https://github.com/Promis229/FrostByte', '_blank')">
-                <span class="component-icon">💻</span>
-                <h3 class="component-title">Source Code</h3>
-                <div class="component-status status-live">🟢 GITHUB</div>
-                <p class="component-description">
-                    Access the complete source code, documentation and deployment guides on GitHub.
+                    Interactive dashboard with Machine Learning to predict exoplanets. Real-time visualizations and AI analysis.
                 </p>
             </div>
         </div>
@@ -270,7 +264,9 @@
         
         createStarfield();
         
-        // Parallax effect on stars
+        function openDashboard() {
+            window.location.href = 'dashboard.html';
+        }        // Parallax effect on stars
         document.addEventListener('mousemove', (e) => {
             const stars = document.querySelectorAll('.star');
             const x = e.clientX / window.innerWidth;

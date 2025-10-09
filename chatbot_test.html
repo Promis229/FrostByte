@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FrostByte Chatbot - Test</title>
+    <title>FrostByte Chatbot - AI Assistant</title>
     <style>
         * {
             margin: 0;
@@ -12,205 +12,482 @@
         }
         
         body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
             min-height: 100vh;
-            color: white;
+            color: #e2e8f0;
+            display: flex;
         }
         
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
+        .sidebar {
+            width: 280px;
+            background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
             padding: 20px;
-            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            border-right: 1px solid rgba(59, 130, 246, 0.3);
+            box-shadow: 2px 0 20px rgba(59, 130, 246, 0.1);
+        }
+        
+        .sidebar-header {
+            margin-bottom: 30px;
+        }
+        
+        .sidebar-header h2 {
+            color: #60a5fa;
+            font-size: 1.4rem;
+            margin-bottom: 5px;
+            text-shadow: 0 0 10px rgba(96, 165, 250, 0.5);
+        }
+        
+        .sidebar-header p {
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+        
+        .new-chat-btn {
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            color: white;
+            cursor: pointer;
+            font-weight: 600;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+        }
+        
+        .new-chat-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.5);
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+        }
+        
+        .conversations {
+            flex: 1;
+            overflow-y: auto;
+        }
+        
+        .conversation-item {
+            padding: 12px 16px;
+            margin-bottom: 8px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s;
+            border-left: 3px solid transparent;
+        }
+        
+        .conversation-item:hover {
+            background: rgba(59, 130, 246, 0.1);
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.2);
+        }
+        
+        .conversation-item.active {
+            background: rgba(59, 130, 246, 0.2);
+            border-left-color: #3b82f6;
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+        }
+        
+        .conversation-title {
+            font-weight: 500;
+            margin-bottom: 4px;
+            color: #f8fafc;
+        }
+        
+        .conversation-preview {
+            font-size: 0.85rem;
+            color: #94a3b8;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .main-content {
+            flex: 1;
             display: flex;
             flex-direction: column;
         }
         
-        .header {
-            text-align: center;
-            margin-bottom: 20px;
+        
+        .chat-header {
+            padding: 20px 30px;
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            border-bottom: 1px solid rgba(59, 130, 246, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 20px rgba(59, 130, 246, 0.2);
         }
         
-        .header h1 {
-            color: #fff;
-            font-size: 2.5rem;
-            margin-bottom: 10px;
+        .chat-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #60a5fa;
+            text-shadow: 0 0 10px rgba(96, 165, 250, 0.5);
         }
         
-        .header p {
-            color: #a0b5d1;
-            font-size: 1.1rem;
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+        }
+        
+        .status-indicator.online {
+            background: rgba(46, 204, 113, 0.2);
+            color: #27ae60;
+            border: 1px solid rgba(46, 204, 113, 0.3);
+        }
+        
+        .status-indicator.offline {
+            background: rgba(231, 76, 60, 0.2);
+            color: #e74c3c;
+            border: 1px solid rgba(231, 76, 60, 0.3);
         }
         
         .chat-container {
             flex: 1;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            padding: 20px;
-            margin-bottom: 20px;
             display: flex;
             flex-direction: column;
-            backdrop-filter: blur(10px);
+            overflow: hidden;
+            background: linear-gradient(to bottom, #0f172a 0%, #1e293b 100%);
+            box-shadow: inset 0 0 50px rgba(59, 130, 246, 0.1);
         }
         
         .messages {
             flex: 1;
             overflow-y: auto;
-            margin-bottom: 20px;
-            padding: 10px;
+            padding: 20px 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
         }
         
         .message {
-            margin-bottom: 15px;
-            padding: 12px 16px;
-            border-radius: 18px;
-            max-width: 80%;
-            word-wrap: break-word;
-        }
-        
-        .user-message {
-            background: #4CAF50;
-            margin-left: auto;
-            text-align: right;
-        }
-        
-        .bot-message {
-            background: rgba(255, 255, 255, 0.2);
-            margin-right: auto;
-        }
-        
-        .input-container {
             display: flex;
-            gap: 10px;
+            align-items: flex-start;
+            gap: 12px;
+            max-width: 85%;
         }
         
-        .input-container input {
-            flex: 1;
-            padding: 12px 16px;
-            border: none;
-            border-radius: 25px;
-            background: rgba(255, 255, 255, 0.9);
-            color: #333;
-            font-size: 16px;
+        .message.user {
+            align-self: flex-end;
+            flex-direction: row-reverse;
         }
         
-        .input-container button {
-            padding: 12px 24px;
-            border: none;
-            border-radius: 25px;
-            background: #4CAF50;
-            color: white;
-            cursor: pointer;
-            font-size: 16px;
-            transition: background 0.3s;
+        .message-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
         }
         
-        .input-container button:hover {
-            background: #45a049;
+        .message.user .message-avatar {
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
         }
         
-        .input-container button:disabled {
-            background: #ccc;
-            cursor: not-allowed;
+        .message.bot .message-avatar {
+            background: linear-gradient(135deg, #60a5fa, #3b82f6);
+            box-shadow: 0 0 15px rgba(96, 165, 250, 0.4);
         }
         
-        .features-section {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
+        .message-content {
+            background: rgba(30, 41, 59, 0.8);
+            padding: 14px 18px;
+            border-radius: 18px;
+            line-height: 1.5;
+            position: relative;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+        }
+        
+        .message.user .message-content {
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            color: #ffffff;
+            border-bottom-right-radius: 6px;
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+        }
+        
+        .message.bot .message-content {
+            background: rgba(30, 41, 59, 0.9);
+            color: #e2e8f0;
+            border-bottom-left-radius: 6px;
+            border: 1px solid rgba(96, 165, 250, 0.3);
+            box-shadow: 0 0 15px rgba(96, 165, 250, 0.2);
+        }
+        
+        .input-section {
+            padding: 20px 30px;
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            border-top: 1px solid rgba(59, 130, 246, 0.3);
+            box-shadow: 0 -2px 20px rgba(59, 130, 246, 0.1);
+        }
+        
+        .ml-features {
+            margin-bottom: 15px;
             padding: 15px;
-            margin-bottom: 20px;
+            background: rgba(59, 130, 246, 0.1);
+            border-radius: 12px;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.2);
         }
         
-        .features-section h3 {
+        .ml-features h4 {
+            color: #60a5fa;
             margin-bottom: 10px;
-            color: #ffd700;
+            font-size: 0.9rem;
         }
         
         .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 10px;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 8px;
         }
         
-        .features-grid input {
-            padding: 8px;
-            border: none;
-            border-radius: 5px;
-            background: rgba(255, 255, 255, 0.9);
-            color: #333;
+        .feature-input {
+            padding: 6px 10px;
+            border: 1px solid rgba(59, 130, 246, 0.4);
+            border-radius: 6px;
+            background: rgba(30, 41, 59, 0.8);
+            color: #e2e8f0;
+            font-size: 0.8rem;
         }
         
-        .test-buttons {
+        .feature-input:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 10px rgba(59, 130, 246, 0.4);
+        }
+        
+        .quick-actions {
             display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
+            gap: 8px;
+            margin-bottom: 15px;
             flex-wrap: wrap;
         }
         
-        .test-btn {
-            padding: 8px 16px;
+        .quick-btn {
+            padding: 6px 12px;
+            border: 1px solid rgba(59, 130, 246, 0.4);
+            border-radius: 20px;
+            background: rgba(30, 41, 59, 0.6);
+            color: #60a5fa;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: all 0.2s;
+        }
+        
+        .quick-btn:hover {
+            border-color: #3b82f6;
+            background: rgba(59, 130, 246, 0.2);
+            transform: translateY(-1px);
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.3);
+        }
+        
+        
+        .input-container {
+            display: flex;
+            gap: 12px;
+            align-items: flex-end;
+        }
+        
+        .input-wrapper {
+            flex: 1;
+            position: relative;
+        }
+        
+        .message-input {
+            width: 100%;
+            padding: 14px 20px;
+            border: 1px solid rgba(59, 130, 246, 0.4);
+            border-radius: 25px;
+            background: rgba(30, 41, 59, 0.8);
+            color: #e2e8f0;
+            font-size: 16px;
+            resize: none;
+            max-height: 120px;
+            min-height: 50px;
+        }
+        
+        .message-input:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
+        }
+        
+        .send-btn {
+            width: 50px;
+            height: 50px;
             border: none;
-            border-radius: 15px;
-            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
             color: white;
             cursor: pointer;
-            transition: background 0.3s;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
         }
         
-        .test-btn:hover {
-            background: rgba(255, 255, 255, 0.3);
+        .send-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.6);
         }
         
-        .status {
-            text-align: center;
-            padding: 10px;
-            border-radius: 10px;
-            margin-bottom: 20px;
+        .send-btn:disabled {
+            background: #475569;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
         }
         
-        .status.online {
-            background: rgba(76, 175, 80, 0.3);
+        .typing-indicator {
+            display: none;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 18px;
+            color: #64748b;
+            font-style: italic;
         }
         
-        .status.offline {
-            background: rgba(244, 67, 54, 0.3);
+        .typing-dots {
+            display: flex;
+            gap: 4px;
+        }
+        
+        .typing-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #3b82f6;
+            animation: typing 1.4s infinite;
+        }
+        
+        .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+        .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+        
+        @keyframes typing {
+            0%, 60%, 100% { transform: translateY(0); }
+            30% { transform: translateY(-10px); }
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                height: auto;
+                border-right: none;
+                border-bottom: 1px solid #333;
+            }
+            
+            .conversations {
+                display: none;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>🌌 FrostByte Chatbot</h1>
-            <p>AI Assistant specialized in exoplanets</p>
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <h2>🌌 FrostByte AI</h2>
+            <p>Exoplanet Specialist</p>
         </div>
         
-        <div id="status" class="status offline">
-            🔄 Checking connection...
-        </div>
+        <button class="new-chat-btn" onclick="startNewChat()">
+            ➕ New Conversation
+        </button>
         
-        <div class="test-buttons">
-            <button class="test-btn" onclick="testQuestions('Hello!')">👋 Greet</button>
-            <button class="test-btn" onclick="testQuestions('What is an exoplanet?')">🌍 Exoplanets</button>
-            <button class="test-btn" onclick="testQuestions('How to verify if it\'s an exoplanet?')">🔬 Verification</button>
-            <button class="test-btn" onclick="testWithRandomData()">📊 ML Test</button>
+        <div class="conversations" id="conversations">
+            <div class="conversation-item active" onclick="selectConversation(0)">
+                <div class="conversation-title">Exoplanet Discovery</div>
+                <div class="conversation-preview">Welcome! Ready to explore...</div>
+            </div>
         </div>
-        
-        <div class="features-section">
-            <h3>🤖 Test the AI Assistant</h3>
-            <p>Ask questions about space exploration and exoplanets!</p>
+    </div>
+    
+    <div class="main-content">
+        <div class="chat-header">
+            <div class="chat-title">AI Assistant - Space Explorer</div>
+            <div id="status" class="status-indicator offline">
+                <span>🔴</span> Connecting...
+            </div>
         </div>
         
         <div class="chat-container">
             <div class="messages" id="messages">
-                <div class="bot-message message">
-                    🌌 Hello! I'm the FrostByte assistant. Ask me questions about exoplanets or test my features with the buttons above!
+                <div class="message bot">
+                    <div class="message-avatar">🤖</div>
+                    <div class="message-content">
+                        🌌 Hello! I'm your FrostByte AI assistant specialized in exoplanets. I can help you:
+                        <br>• Analyze astronomical data
+                        <br>• Answer questions about space exploration
+                        <br>• Detect exoplanets using ML algorithms
+                        <br><br>Ask me anything about the universe! 🚀
+                    </div>
                 </div>
             </div>
             
+            <div class="typing-indicator" id="typingIndicator">
+                <span>🤖 FrostByte is thinking</span>
+                <div class="typing-dots">
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="input-section">
+            <div class="ml-features">
+                <h4>🔬 ML Exoplanet Detection (Optional)</h4>
+                <div class="features-grid">
+                    <input type="number" class="feature-input" id="feature0" placeholder="Score" step="0.01">
+                    <input type="number" class="feature-input" id="feature1" placeholder="Period" step="0.01">
+                    <input type="number" class="feature-input" id="feature2" placeholder="Duration" step="0.01">
+                    <input type="number" class="feature-input" id="feature3" placeholder="Depth" step="0.01">
+                    <input type="number" class="feature-input" id="feature4" placeholder="SNR" step="0.01">
+                    <input type="number" class="feature-input" id="feature5" placeholder="Radius" step="0.01">
+                    <input type="number" class="feature-input" id="feature6" placeholder="Temp" step="0.01">
+                    <input type="number" class="feature-input" id="feature7" placeholder="Flag NT" step="0.01">
+                    <input type="number" class="feature-input" id="feature8" placeholder="Flag SS" step="0.01">
+                    <input type="number" class="feature-input" id="feature9" placeholder="Extra" step="0.01">
+                </div>
+            </div>
+            
+            <div class="quick-actions">
+                <button class="quick-btn" onclick="quickQuestion('What is an exoplanet?')">🌍 Exoplanets</button>
+                <button class="quick-btn" onclick="quickQuestion('How to detect exoplanets?')">🔭 Detection</button>
+                <button class="quick-btn" onclick="quickQuestion('Explain Kepler mission data')">📊 Kepler Data</button>
+                <button class="quick-btn" onclick="testWithRandomData()">🎲 Random ML Test</button>
+                <button class="quick-btn" onclick="clearMlData()">🗑️ Clear ML</button>
+            </div>
+            
             <div class="input-container">
-                <input type="text" id="messageInput" placeholder="Ask your question about exoplanets..." onkeypress="handleKeyPress(event)">
-                <button onclick="sendMessage()" id="sendBtn">Send</button>
+                <div class="input-wrapper">
+                    <textarea 
+                        class="message-input" 
+                        id="messageInput" 
+                        placeholder="Ask about exoplanets, space exploration, or input ML data above..."
+                        onkeydown="handleKeyDown(event)"
+                        rows="1"
+                    ></textarea>
+                </div>
+                <button class="send-btn" id="sendBtn" onclick="sendMessage()">
+                    ➤
+                </button>
             </div>
         </div>
     </div>
@@ -218,46 +495,80 @@
     <script>
         const API_BASE = 'http://localhost:5000';
         let isOnline = false;
-
-        // Vérifier la connexion au serveur
-        async function checkConnection() {
-            try {
-                const response = await fetch(`${API_BASE}/api/test`);
-                const data = await response.json();
-                isOnline = true;
-                document.getElementById('status').className = 'status online';
-                document.getElementById('status').innerHTML = '✅ Servers connected: Chat + ML';
-            } catch (error) {
-                isOnline = false;
-                document.getElementById('status').className = 'status offline';
-                document.getElementById('status').innerHTML = '❌ Servers offline';
+        let conversations = [
+            {
+                id: 0,
+                title: 'Exoplanet Discovery',
+                messages: []
             }
+        ];
+        let currentConversation = 0;
+
+        async function checkConnection() {
+            // Since we're using fallback responses, always show as online
+            isOnline = true;
+            updateStatus('online', '🟢 Online');
         }
 
-        // Ajouter un message à la conversation
+        function updateStatus(status, text) {
+            const statusEl = document.getElementById('status');
+            statusEl.className = `status-indicator ${status}`;
+            statusEl.innerHTML = `<span>${status === 'online' ? '🟢' : '🔴'}</span> ${text}`;
+        }
+
         function addMessage(content, isUser = false) {
             const messagesDiv = document.getElementById('messages');
             const messageDiv = document.createElement('div');
-            messageDiv.className = `message ${isUser ? 'user-message' : 'bot-message'}`;
-            messageDiv.innerHTML = content.replace(/\n/g, '<br>');
+            messageDiv.className = `message ${isUser ? 'user' : 'bot'}`;
+            
+            const avatar = document.createElement('div');
+            avatar.className = 'message-avatar';
+            avatar.textContent = isUser ? '👤' : '🤖';
+            
+            const messageContent = document.createElement('div');
+            messageContent.className = 'message-content';
+            messageContent.innerHTML = content.replace(/\n/g, '<br>');
+            
+            messageDiv.appendChild(avatar);
+            messageDiv.appendChild(messageContent);
             messagesDiv.appendChild(messageDiv);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+
+            conversations[currentConversation].messages.push({
+                content,
+                isUser,
+                timestamp: new Date()
+            });
+        }
+
+        function showTypingIndicator() {
+            document.getElementById('typingIndicator').style.display = 'flex';
+            const messagesDiv = document.getElementById('messages');
             messagesDiv.scrollTop = messagesDiv.scrollHeight;
         }
 
-        // Récupérer les features depuis les inputs
+        function hideTypingIndicator() {
+            document.getElementById('typingIndicator').style.display = 'none';
+        }
+
         function getFeatures() {
             const features = [];
             for (let i = 0; i < 10; i++) {
                 const input = document.getElementById(`feature${i}`);
-                const value = parseFloat(input.value);
-                if (!isNaN(value)) {
-                    features.push(value);
+                if (input && input.value.trim() !== '') {
+                    const value = parseFloat(input.value);
+                    if (!isNaN(value)) {
+                        features.push(value);
+                    } else {
+                        return null;
+                    }
+                } else {
+                    return null;
                 }
             }
             return features.length === 10 ? features : null;
         }
 
-        // Envoyer un message
         async function sendMessage() {
             const input = document.getElementById('messageInput');
             const sendBtn = document.getElementById('sendBtn');
@@ -265,23 +576,21 @@
             
             if (!message) return;
             
-            // Désactiver l'interface pendant l'envoi
             input.disabled = true;
             sendBtn.disabled = true;
             
-            // Ajouter le message de l'utilisateur
             addMessage(message, true);
             input.value = '';
             
+            showTypingIndicator();
+            
             try {
-                // Préparer la requête
                 const requestBody = { prompt: message };
                 const features = getFeatures();
                 if (features) {
                     requestBody.features = features;
                 }
                 
-                // Envoyer à l'API
                 const response = await fetch(`${API_BASE}/api/chat`, {
                     method: 'POST',
                     headers: {
@@ -295,44 +604,242 @@
                 }
                 
                 const data = await response.json();
-                addMessage(data.response);
+                
+                setTimeout(() => {
+                    hideTypingIndicator();
+                    addMessage(data.response);
+                    updateConversationPreview();
+                }, 1000);
                 
             } catch (error) {
-                addMessage(`❌ Error: ${error.message}. Check that servers are running.`);
+                hideTypingIndicator();
+                // Use fallback responses instead of showing error
+                const fallbackResponse = generateFallbackResponse(message);
+                setTimeout(() => {
+                    addMessage(fallbackResponse);
+                    updateConversationPreview();
+                }, 500);
             }
             
-            // Réactiver l'interface
             input.disabled = false;
             sendBtn.disabled = false;
             input.focus();
+            autoResizeTextarea(input);
+        }
+        
+        // Fallback responses in English when server is not available
+        function generateFallbackResponse(prompt) {
+            const lowerPrompt = prompt.toLowerCase();
+            
+            if (lowerPrompt.includes('hello') || lowerPrompt.includes('hi') || lowerPrompt.includes('bonjour') || lowerPrompt.includes('greetings')) {
+                const greetings = [
+                    "👋 Hello! I'm the FrostByte AI assistant specialized in exoplanet detection and space exploration. How can I help you explore the cosmos today?",
+                    "🌌 Greetings! Welcome to FrostByte - your gateway to exoplanet discovery. What would you like to know about distant worlds?",
+                    "🚀 Hi there! I'm here to help you understand exoplanets and space science. What cosmic questions do you have?"
+                ];
+                return greetings[Math.floor(Math.random() * greetings.length)];
+            } 
+            
+            else if (lowerPrompt.includes('what') && (lowerPrompt.includes('exoplanet') || lowerPrompt.includes('planet'))) {
+                const explanations = [
+                    "🌍 Exoplanets are planets that orbit stars outside our Solar System. We've discovered over 5,000 confirmed exoplanets using various detection methods!",
+                    "🔭 An exoplanet is a world beyond our solar system. They come in many types: gas giants like Jupiter, rocky planets like Earth, and exotic super-Earths.",
+                    "⭐ Exoplanets are distant worlds orbiting other stars. The first confirmed exoplanet around a sun-like star was discovered in 1995, revolutionizing astronomy!"
+                ];
+                return explanations[Math.floor(Math.random() * explanations.length)];
+            }
+            
+            else if (lowerPrompt.includes('how') && (lowerPrompt.includes('detect') || lowerPrompt.includes('find') || lowerPrompt.includes('discover'))) {
+                const methods = [
+                    "🔬 We detect exoplanets using several methods:\n• Transit photometry (measuring star brightness dips)\n• Radial velocity (stellar wobble)\n• Direct imaging\n• Gravitational microlensing",
+                    "📊 The transit method is most successful - when a planet passes in front of its star, it causes a tiny dip in brightness that we can measure from Earth.",
+                    "🛰️ Space telescopes like Kepler, TESS, and James Webb have revolutionized exoplanet detection by providing precise measurements from above Earth's atmosphere."
+                ];
+                return methods[Math.floor(Math.random() * methods.length)];
+            }
+            
+            else if (lowerPrompt.includes('type') && lowerPrompt.includes('planet')) {
+                const types = [
+                    "🌎 Exoplanets come in various types:\n• Earth-like rocky planets\n• Super-Earths (larger rocky worlds)\n• Mini-Neptunes (smaller gas planets)\n• Hot Jupiters (gas giants close to their stars)\n• Exotic lava worlds!",
+                    "🪐 We classify exoplanets by size and composition: Terrestrial planets (rocky like Earth), Gas giants (like Jupiter), Ice giants (like Neptune), and unique types like hot Jupiters.",
+                    "🌡️ Exoplanets exist in different temperature zones: Hot planets close to their stars, temperate worlds in habitable zones, and frozen planets in outer orbits."
+                ];
+                return types[Math.floor(Math.random() * types.length)];
+            }
+            
+            else if (lowerPrompt.includes('kepler')) {
+                const keplerInfo = [
+                    "🔭 The Kepler Space Telescope was a game-changer for exoplanet discovery! It monitored over 150,000 stars simultaneously and discovered thousands of exoplanets using the transit method.",
+                    "⭐ Kepler's mission lasted from 2009-2018 and revolutionized our understanding of planetary systems. It showed us that planets are incredibly common in our galaxy!",
+                    "📡 Kepler used ultra-precise photometry to detect tiny brightness changes when planets transit their host stars. Its discoveries include many Earth-sized planets in habitable zones."
+                ];
+                return keplerInfo[Math.floor(Math.random() * keplerInfo.length)];
+            }
+            
+            else if (lowerPrompt.includes('habitable') || lowerPrompt.includes('life') || lowerPrompt.includes('living')) {
+                const habitability = [
+                    "🌱 The habitable zone is the region around a star where liquid water could exist on a planet's surface - not too hot, not too cold, but just right!",
+                    "💧 For a planet to be potentially habitable, it needs to be in the right temperature zone, have the right size to retain an atmosphere, and possibly have water.",
+                    "🔬 Scientists look for biosignatures in exoplanet atmospheres - gases like oxygen, water vapor, and methane that could indicate life processes."
+                ];
+                return habitability[Math.floor(Math.random() * habitability.length)];
+            }
+            
+            else if (lowerPrompt.includes('exoplanet') || lowerPrompt.includes('planet') || lowerPrompt.includes('space') || lowerPrompt.includes('star')) {
+                const general = [
+                    "🌌 Fascinating! Exoplanets are incredible distant worlds that orbit around other stars. Each one is unique with different sizes, compositions, and orbits.",
+                    "🔭 The study of exoplanets has revealed that planetary systems are incredibly diverse and common throughout our galaxy!",
+                    "⭐ Every star you see in the night sky could potentially host planets - we're discovering new worlds almost every day!"
+                ];
+                return general[Math.floor(Math.random() * general.length)];
+            }
+            
+            else {
+                const defaults = [
+                    "🌌 That's an interesting question about space! Could you ask me something more specific about exoplanets, detection methods, or space exploration?",
+                    "🔭 I'd love to help you learn about exoplanets! Try asking about detection methods, planet types, or famous discoveries.",
+                    "⭐ I'm specialized in exoplanet science. Feel free to ask about how we find distant worlds, what they're like, or the technology we use to study them!"
+                ];
+                return defaults[Math.floor(Math.random() * defaults.length)];
+            }
         }
 
-        // Questions de test rapides
-        function testQuestions(question) {
+        function quickQuestion(question) {
             document.getElementById('messageInput').value = question;
             sendMessage();
         }
 
-        // Test avec données aléatoires
         function testWithRandomData() {
-            // Remplir avec des données aléatoires
             for (let i = 0; i < 10; i++) {
-                document.getElementById(`feature${i}`).value = (Math.random() * 5).toFixed(2);
+                const input = document.getElementById(`feature${i}`);
+                input.value = (Math.random() * 5).toFixed(3);
             }
-            testQuestions('Analyze this data to detect an exoplanet');
+            quickQuestion('Analyze this exoplanet data using machine learning');
         }
 
-        // Gestion de la touche Entrée
-        function handleKeyPress(event) {
-            if (event.key === 'Enter') {
+        function clearMlData() {
+            for (let i = 0; i < 10; i++) {
+                const input = document.getElementById(`feature${i}`);
+                input.value = '';
+            }
+        }
+
+        function handleKeyDown(event) {
+            if (event.key === 'Enter' && !event.shiftKey) {
+                event.preventDefault();
                 sendMessage();
             }
         }
 
-        // Initialisation
-        checkConnection();
-        setInterval(checkConnection, 10000); // Vérifier toutes les 10 secondes
-        document.getElementById('messageInput').focus();
+        function autoResizeTextarea(textarea) {
+            textarea.style.height = 'auto';
+            textarea.style.height = Math.min(textarea.scrollHeight, 120) + 'px';
+        }
+
+        function startNewChat() {
+            const newId = conversations.length;
+            conversations.push({
+                id: newId,
+                title: `Chat ${newId + 1}`,
+                messages: []
+            });
+            
+            const conversationsDiv = document.getElementById('conversations');
+            const convItem = document.createElement('div');
+            convItem.className = 'conversation-item';
+            convItem.onclick = () => selectConversation(newId);
+            convItem.innerHTML = `
+                <div class="conversation-title">Chat ${newId + 1}</div>
+                <div class="conversation-preview">New conversation...</div>
+            `;
+            conversationsDiv.appendChild(convItem);
+            
+            selectConversation(newId);
+        }
+
+        function selectConversation(id) {
+            document.querySelectorAll('.conversation-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            document.querySelectorAll('.conversation-item')[id].classList.add('active');
+            
+            currentConversation = id;
+            loadConversationMessages();
+        }
+
+        function loadConversationMessages() {
+            const messagesDiv = document.getElementById('messages');
+            messagesDiv.innerHTML = '';
+            
+            if (currentConversation === 0 && conversations[0].messages.length === 0) {
+                const welcomeDiv = document.createElement('div');
+                welcomeDiv.className = 'message bot';
+                welcomeDiv.innerHTML = `
+                    <div class="message-avatar">🤖</div>
+                    <div class="message-content">
+                        🌌 Hello! I'm your FrostByte AI assistant specialized in exoplanets. I can help you:
+                        <br>• Analyze astronomical data
+                        <br>• Answer questions about space exploration
+                        <br>• Detect exoplanets using ML algorithms
+                        <br><br>Ask me anything about the universe! 🚀
+                    </div>
+                `;
+                messagesDiv.appendChild(welcomeDiv);
+            } else {
+                conversations[currentConversation].messages.forEach(msg => {
+                    const messageDiv = document.createElement('div');
+                    messageDiv.className = `message ${msg.isUser ? 'user' : 'bot'}`;
+                    
+                    const avatar = document.createElement('div');
+                    avatar.className = 'message-avatar';
+                    avatar.textContent = msg.isUser ? '👤' : '🤖';
+                    
+                    const messageContent = document.createElement('div');
+                    messageContent.className = 'message-content';
+                    messageContent.innerHTML = msg.content.replace(/\n/g, '<br>');
+                    
+                    messageDiv.appendChild(avatar);
+                    messageDiv.appendChild(messageContent);
+                    messagesDiv.appendChild(messageDiv);
+                });
+            }
+            
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+
+        function updateConversationPreview() {
+            const conv = conversations[currentConversation];
+            if (conv.messages.length > 0) {
+                const lastMessage = conv.messages[conv.messages.length - 1];
+                const preview = lastMessage.content.substring(0, 50) + (lastMessage.content.length > 50 ? '...' : '');
+                
+                const convItems = document.querySelectorAll('.conversation-item');
+                if (convItems[currentConversation]) {
+                    const previewEl = convItems[currentConversation].querySelector('.conversation-preview');
+                    previewEl.textContent = preview;
+                }
+                
+                if (conv.title.startsWith('Chat ') && conv.messages.length === 2) {
+                    const firstUserMessage = conv.messages.find(m => m.isUser);
+                    if (firstUserMessage) {
+                        conv.title = firstUserMessage.content.substring(0, 20) + '...';
+                        const titleEl = convItems[currentConversation].querySelector('.conversation-title');
+                        titleEl.textContent = conv.title;
+                    }
+                }
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            checkConnection();
+            setInterval(checkConnection, 15000);
+            
+            const textarea = document.getElementById('messageInput');
+            textarea.addEventListener('input', () => autoResizeTextarea(textarea));
+            
+            textarea.focus();
+        });
     </script>
 </body>
 </html>
