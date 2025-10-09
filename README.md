@@ -2,7 +2,12 @@
 
 ![FrostByte Banner](https://img.shields.io/badge/FrostByte-Exoplanet%20Discovery-blue?style=for-the-badge&logo=nasa)
 
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Vercel-brightgreen?style=for-the-badge&logo=vercel)](https://frost-byte-owu8.vercel.app)
+[![GitHub](https://img.shields.io/badge/GitHub-Repository-black?style=for-the-badge&logo=github)](https://github.com/Promis229/FrostByte)
+
 An advanced AI-powered platform for exoplanet detection and space exploration, featuring interactive dashboards, intelligent chatbots, and immersive space games.
+
+## 🚀 [🌐 **VISIT LIVE DEMO** →](https://frost-byte-owu8.vercel.app)
 
 ## ✨ Features
 
